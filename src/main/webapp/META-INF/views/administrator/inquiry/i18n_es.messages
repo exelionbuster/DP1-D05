@@ -1,0 +1,30 @@
+# i18n_es.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.inquiry.list.label.title 				= Título
+administrator.inquiry.list.label.deadline 			= Fecha límite
+
+administrator.inquiry.form.label.title 				= Título:
+administrator.inquiry.form.label.creation-date 		= Fecha de creación:
+administrator.inquiry.form.label.deadline 			= Fecha límite:
+administrator.inquiry.form.label.description 		= Descripción:
+administrator.inquiry.form.label.min-money 			= Dinero mínimo:
+administrator.inquiry.form.label.max-money 			= Dinero máximo:
+administrator.inquiry.form.label.contact-email 		= E-mail de contacto:
+
+administrator.inquiry.form.error.past-deadline 		= La fecha límite tiene que ser futura
+administrator.inquiry.form.error.max-money.less		= El dinero mínimo no puede ser mayor que el dinero máximo
+administrator.inquiry.form.error.min-money.negative = El dinero mínimo no puede ser negativo
+administrator.inquiry.form.error.max-money.negative = El dinero máximo no puede ser negativo
+
+administrator.inquiry.form.button.return 			= Volver
+administrator.inquiry.form.button.create 			= Crear
+administrator.inquiry.form.button.update 			= Actualizar
+administrator.inquiry.form.button.delete 			= Eliminar

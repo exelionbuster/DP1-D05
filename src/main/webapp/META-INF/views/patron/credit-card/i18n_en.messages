@@ -1,0 +1,22 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+patron.credit-card.form.label.holder-name 			= Holder name:
+patron.credit-card.form.label.number 				= Number:
+patron.credit-card.form.label.brand 				= Brand:
+patron.credit-card.form.label.expiration-date 		= Expiration date:
+patron.credit-card.form.label.cvv 					= CVV:
+
+patron.credit-card.form.error.past-expiration-date 	= The expiration date must be in the future	
+
+patron.credit-card.form.button.create 				= Create
+patron.credit-card.form.button.update 				= Update
+patron.credit-card.form.button.delete 				= Delete
+patron.credit-card.form.button.return 				= Return

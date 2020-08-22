@@ -1,0 +1,35 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.challenge.list.label.title 				= Título
+administrator.challenge.list.label.deadline	 			= Fecha límite
+
+administrator.challenge.form.label.title 				= Título:
+administrator.challenge.form.label.deadline 			= Fecha límite:
+administrator.challenge.form.label.description 			= Descripción:
+administrator.challenge.form.label.rookie-goal			= Objetivo principiante:
+administrator.challenge.form.label.rookie-reward		= Recompensa para el objetivo principiante
+administrator.challenge.form.label.average-goal			= Objetivo promedio::
+administrator.challenge.form.label.average-reward		= Recompensa para el objetivo promedio:
+administrator.challenge.form.label.expert-goal			= Objetivo experto:
+administrator.challenge.form.label.expert-reward		= Recompensa para el objetivo experto:
+
+administrator.challenge.form.error.deadline				= La fecha límite tiene que ser futura
+administrator.challenge.form.error.timestamp			= La fecha límite tiene que seguir el patrón DD/MM/AAAA HH:mm
+administrator.challenge.form.error.null-currency		= La cantidad y la divisa (€) deben ser especificadas
+administrator.challenge.form.error.expert-reward		= Esta cantidad debe ser mayor o igual que la recompensa para el objetivo promedio
+administrator.challenge.form.error.average-reward		= Esta cantidad debe ser mayor o igual que la recompensa para el objetivo principiante
+
+administrator.challenge.form.placeholder.deadline		= DD/MM/AAAA HH:mm
+
+administrator.challenge.form.button.update				= Actualizar
+administrator.challenge.form.button.delete				= Eliminar
+administrator.challenge.form.button.create				= Crear
+administrator.challenge.form.button.return 				= Volver

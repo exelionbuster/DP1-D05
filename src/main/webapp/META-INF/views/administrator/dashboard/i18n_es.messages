@@ -1,0 +1,29 @@
+administrator.dashboard.form.title 									=	Panel de estadísticas
+
+administrator.dashboard.form.table.cell.total-notices				= 	Número de noticias
+administrator.dashboard.form.table.cell.total-tech-records	 		= 	Número de tecnologías
+administrator.dashboard.form.table.cell.total-tool-records	 		= 	Número de herramientas
+
+administrator.dashboard.form.table.cell.stats.min					= 	Mínimo
+administrator.dashboard.form.table.cell.stats.max					=	Máximo
+administrator.dashboard.form.table.cell.stats.avg					=	Media
+administrator.dashboard.form.table.cell.stats.stddev				=	Desviación estándar
+
+administrator.dashboard.form.table.title.min-money-active-inquiries	=	Dinero mínimo de las consultas vigentes
+administrator.dashboard.form.table.title.max-money-active-inquiries	=	Dinero máximo de las consultas vigentes
+administrator.dashboard.form.table.title.min-money-active-overtures	=	Dinero mínimo de las propuestas vigentes
+administrator.dashboard.form.table.title.max-money-active-overtures	=	Dinero máximo de las propuestas vigentes
+
+administrator.dashboard.form.table.cell.inv-round-per-entrep		=	Media de rondas de inversión por emprendedor
+administrator.dashboard.form.table.cell.app-per-entrep				= 	Media de solicitudes por emprendedor
+administrator.dashboard.form.table.cell.app-per-investor			= 	Media de solicitudes por inversor
+
+administrator.dashboard.form.chart.title.techs-by-sector			=	Tecnologías por sector
+administrator.dashboard.form.chart.title.tools-by-sector			=	Herramientas por sector
+
+administrator.dashboard.form.chart.title.tools-by-licence			=	Herramientas por licencia
+administrator.dashboard.form.chart.title.techs-by-licence			=	Tecnologías por licencia
+
+administrator.dashboard.form.chart.title.inv-round-by-kind			=	Rondas de inversión por tipo
+
+administrator.dashboard.form.chart.title.apps-by-status				=	Solicitudes por estado

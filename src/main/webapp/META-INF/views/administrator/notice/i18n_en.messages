@@ -1,0 +1,29 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.notice.list.title = Title
+administrator.notice.list.creation-date = Creation date
+administrator.notice.list.deadline = Deadline
+
+administrator.notice.form.label.header = Header:
+administrator.notice.form.label.title = Title:
+administrator.notice.form.label.creation-date = Creation date:
+administrator.notice.form.label.deadline = Deadline:
+administrator.notice.form.label.body = Body:
+administrator.notice.form.label.links = Links:
+
+administrator.notice.form.error.past-deadline = The deadline must be in the future
+administrator.notice.form.error.must-accept = Since notices cannot be edited, you must accept its creation
+
+administrator.notice.form.placeholder.deadline = YYYY/MM/DD HH:mm
+
+administrator.notice.form.button.checkbox = Accept (Notices cannot be modified or deleted, please check your notice)
+administrator.notice.form.button.return = Return
+administrator.notice.form.button.create = Create

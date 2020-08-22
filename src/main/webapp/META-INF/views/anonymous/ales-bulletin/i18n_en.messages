@@ -1,0 +1,20 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+anonymous.bulletin.ales.form.label.author 		= Author:
+anonymous.bulletin.ales.form.label.lucky-number = Tell me your lucky number: 
+anonymous.bulletin.ales.form.label.text 		= Text:
+anonymous.bulletin.ales.form.button.create 		= Create
+anonymous.bulletin.ales.form.button.return 		= Return
+
+anonymous.bulletin.ales.list.label.moment 		= Moment
+anonymous.bulletin.ales.list.label.author 		= Author
+anonymous.bulletin.ales.list.label.text 		= Text
+anonymous.bulletin.ales.list.label.lucky-number = Lucky Number

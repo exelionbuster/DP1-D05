@@ -1,0 +1,35 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.inquiry.list.label.title 				= Title
+administrator.inquiry.list.label.deadline 			= Deadline
+
+administrator.inquiry.form.label.title 				= Title:
+administrator.inquiry.form.label.creation-date 		= Creation date:
+administrator.inquiry.form.label.deadline 			= Deadline:
+administrator.inquiry.form.label.description 		= Description:
+administrator.inquiry.form.label.min-money 			= Minimum money:
+administrator.inquiry.form.label.max-money 			= Maximum money:
+administrator.inquiry.form.label.contact-email 		= Contact e-mail:
+
+administrator.inquiry.form.error.past-deadline 		= The deadline must be in the future
+administrator.inquiry.form.error.max-money.less		= The minimum money cannot be greater than the maximum money
+administrator.inquiry.form.error.min-money.negative = The minimum money cannot be negative
+administrator.inquiry.form.error.max-money.negative = The maximum money cannot be negative
+
+administrator.inquiry.form.button.return 			= Return
+administrator.inquiry.form.button.create 			= Create
+administrator.inquiry.form.button.update 			= Update
+administrator.inquiry.form.button.delete 			= Delete
+
+administrator.inquiry.deadline.before = The deadline date is before from now!
+administrator.inquiry.max-money.less = MinMoney can't be more than MaxMoney!
+administrator.inquiry.min-money.negative = MinMoney can't be negative
+administrator.inquiry.max-money.negative MaxMoney can't be negative

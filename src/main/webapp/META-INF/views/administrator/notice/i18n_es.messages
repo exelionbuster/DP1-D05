@@ -1,0 +1,29 @@
+# i18n_es.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.notice.list.title = Título
+administrator.notice.list.creation-date = Fecha de creación
+administrator.notice.list.deadline = Fecha límite
+
+administrator.notice.form.label.header = Cabecera:
+administrator.notice.form.label.title = Título:
+administrator.notice.form.label.creation-date = Fecha de creación:
+anonymous.notice.form.label.deadline = Fecha límite:
+administrator.notice.form.label.body = Cuerpo:
+administrator.notice.form.label.links = Enlaces:
+
+administrator.notice.form.error.past-deadline = La fecha de creación debe ser futura
+administrator.notice.form.error.must-accept = Ya que las noticias no pueden ser modificadas, se ha de aceptar su creación
+
+administrator.notice.form.placeholder.deadline = DD/MM/AAAA HH:mm
+
+administrator.notice.form.button.checkbox = Acepto (Las noticias no se pueden ni eliminar ni modificar, revise su noticia)
+administrator.notice.form.button.return = Volver
+administrator.notice.form.button.create = Crear

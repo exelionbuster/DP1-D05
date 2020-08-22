@@ -1,0 +1,29 @@
+administrator.dashboard.form.title 									=	Dashboard
+
+administrator.dashboard.form.table.cell.total-notices				= 	Number of notices
+administrator.dashboard.form.table.cell.total-tech-records	 		= 	Number of technologies
+administrator.dashboard.form.table.cell.total-tool-records	 		= 	Number of tools
+
+administrator.dashboard.form.table.cell.stats.min					= 	Minimum
+administrator.dashboard.form.table.cell.stats.max					=	Maximum
+administrator.dashboard.form.table.cell.stats.avg					=	Average
+administrator.dashboard.form.table.cell.stats.stddev				=	Standard deviation
+
+administrator.dashboard.form.table.title.min-money-active-inquiries	=	Minimum money of the active inquiries
+administrator.dashboard.form.table.title.max-money-active-inquiries	=	Maximum money of the active inquiries
+administrator.dashboard.form.table.title.min-money-active-overtures	=	Minimum money of the active overtures
+administrator.dashboard.form.table.title.max-money-active-overtures	=	Maximum money of the active overtures
+
+administrator.dashboard.form.table.cell.inv-round-per-entrep		=	Average investment rounds per entrepreneur
+administrator.dashboard.form.table.cell.app-per-entrep				= 	Average applications per entrepreneur
+administrator.dashboard.form.table.cell.app-per-investor			= 	Average applications per investor
+
+administrator.dashboard.form.chart.title.techs-by-sector			=	Technologies by sector
+administrator.dashboard.form.chart.title.tools-by-sector			=	Tools by sector
+
+administrator.dashboard.form.chart.title.techs-by-licence			=	Technologies by licence
+administrator.dashboard.form.chart.title.tools-by-licence			=	Tools by licence
+
+administrator.dashboard.form.chart.title.inv-round-by-kind			=	Investment rounds by kind
+
+administrator.dashboard.form.chart.title.apps-by-status				=	Applications by status

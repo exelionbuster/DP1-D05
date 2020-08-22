@@ -1,0 +1,24 @@
+# i18n_es.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+authenticated.forum.list.label.title 			= Título
+authenticated.forum.list.label.creation-date 	= Fecha de creación
+authenticated.forum.list.label.owner 			= Dueño
+
+authenticated.forum.form.label.title 			= Título:
+authenticated.forum.form.label.creation-date 	= Fecha de creación:
+authenticated.forum.form.label.owner 			= Dueño:
+authenticated.forum.form.label.users 			= Usuarios:
+authenticated.forum.form.label.investment-round = Ronda de inversión:
+
+authenticated.forum.form.label.no-inv-round		= Este foro no está asociado a ninguna ronda de inversión
+
+authenticated.forum.form.button.messages 		= Mensajes
+authenticated.forum.form.button.return 			= Return

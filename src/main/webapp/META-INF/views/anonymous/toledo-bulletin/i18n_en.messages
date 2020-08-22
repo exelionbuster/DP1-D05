@@ -1,0 +1,12 @@
+# i18n_en.messages
+
+anonymous.bulletin.toledo.list.moment 			= Moment
+anonymous.bulletin.toledo.list.author 			= Author
+anonymous.bulletin.toledo.list.email 			= Email
+anonymous.bulletin.toledo.list.text 			= Text
+
+anonymous.bulletin.toledo.form.label.author 	= Author:
+anonymous.bulletin.toledo.form.label.text 		= Text:
+anonymous.bulletin.toledo.form.label.email 		= Email:
+anonymous.bulletin.toledo.form.button.create 	= Create
+anonymous.bulletin.toledo.form.button.return 	= Return

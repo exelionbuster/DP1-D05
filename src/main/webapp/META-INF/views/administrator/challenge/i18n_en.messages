@@ -1,0 +1,35 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.challenge.list.label.title 				= Title
+administrator.challenge.list.label.deadline	 			= Deadline
+
+administrator.challenge.form.label.title 				= Title:
+administrator.challenge.form.label.deadline 			= Deadline:
+administrator.challenge.form.label.description 			= Description:
+administrator.challenge.form.label.rookie-reward		= Rookie goal reward:
+administrator.challenge.form.label.rookie-goal			= Rookie goal:
+administrator.challenge.form.label.average-reward		= Average goal reward:
+administrator.challenge.form.label.average-goal			= Average goal:
+administrator.challenge.form.label.expert-reward		= Expert goal reward:
+administrator.challenge.form.label.expert-goal			= Expert goal:
+
+administrator.challenge.form.error.past-deadline		= The deadline must be in the future
+administrator.challenge.form.error.timestamp			= The deadline must adhere to the following pattern: YYYY/MM/DD HH:mm
+administrator.challenge.form.error.null-currency		= The amount and currency (€) must be specified
+administrator.challenge.form.error.expert-reward		= This amount must be greater than or equal to the average goal reward
+administrator.challenge.form.error.average-reward		= This amount must be greater than or equal to the rookie goal reward
+
+administrator.challenge.form.placeholder.deadline		= YYYY/MM/DD HH:mm
+
+administrator.challenge.form.button.update				= Update
+administrator.challenge.form.button.delete				= Delete
+administrator.challenge.form.button.create				= Create
+administrator.challenge.form.button.return 				= Return

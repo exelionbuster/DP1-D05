@@ -1,0 +1,17 @@
+# i18n_es.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+administrator.configuration.form.label.spam-words 		= Palabras spam
+administrator.configuration.form.label.threshold 		= Umbral de spam (%)
+administrator.configuration.form.label.activity-sectors = Sectores de actividad
+administrator.configuration.form.label.inv-round-kinds	= Tipos de ronda de inversión
+
+administrator.configuration.form.button.update			= Actualizar
+administrator.configuration.form.button.return 			= Volver
