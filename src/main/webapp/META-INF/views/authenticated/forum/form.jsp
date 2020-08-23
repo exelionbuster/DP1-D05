@@ -6,22 +6,47 @@
 
 <spring:message var="noInvR" code="authenticated.forum.form.label.no-inv-round"/>
 
-<acme:form readonly="true">
-
-	<acme:form-textbox code="authenticated.forum.form.label.title" path="title"/>
-	<acme:form-moment code="authenticated.forum.form.label.creation-date" path="creationDate"/>
-	<acme:form-textbox code="authenticated.forum.form.label.owner" path="forumOwner"/>
-	<acme:form-textbox code="authenticated.forum.form.label.users" path="users"/>
-	<jstl:choose>
-		<jstl:when test="${invR != null}">
-			<acme:form-textbox code="authenticated.forum.form.label.investment-round" path="invR"/>
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:form-textbox code="authenticated.forum.form.label.investment-round" path="invR" placeholder="${noInvR}"/>
-		</jstl:otherwise>
-	</jstl:choose>
-	
-	<acme:form-return code="authenticated.forum.form.button.messages" action="/authenticated/message/list?forumId=${id}"/>
-	<acme:form-return code="authenticated.forum.form.button.return" />
+<acme:form>
+	<jstl:if test="${notOwned}">
+		<acme:form-textbox code="authenticated.forum.form.label.title" path="title" readonly="true"/>
+		<acme:form-textbox code="authenticated.forum.form.label.users" path="users" readonly="true"/>
+	</jstl:if>
+	<jstl:if test="${!notOwned}">
+		<acme:form-textbox code="authenticated.forum.form.label.title" path="title"/>
+		<acme:form-textbox code="authenticated.forum.form.label.users" path="users"/>
+	</jstl:if>
+	<jstl:if test="${command != 'create'}">
+		<acme:form-moment code="authenticated.forum.form.label.creation-date" path="creationDate" readonly="true"/>
+		<acme:form-textbox code="authenticated.forum.form.label.owner" path="forumOwner" readonly="true"/>
+		<jstl:choose>
+			<jstl:when test="${invR != null}">
+				<acme:form-textbox code="authenticated.forum.form.label.investment-round" path="invR" readonly="true"/>
+			</jstl:when>
+			<jstl:otherwise>
+				<acme:form-textbox code="authenticated.forum.form.label.investment-round" path="invR" placeholder="${noInvR}" readonly="true"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</jstl:if>
+	<jstl:if test="${hasMessages}">
+		<acme:form-return code="authenticated.forum.form.button.messages" action="/authenticated/message/list?forumId=${id}"/>
+		<br>
+		<br>
+	</jstl:if>
+	<acme:form-submit test="${command == 'create' and !notOwned}" 
+		code="authenticated.forum.form.button.create" 
+		action="/authenticated/forum/create"/>
+	<acme:form-submit test="${command == 'show' and !notOwned}" 
+		code="authenticated.forum.form.button.update" 
+		action="/authenticated/forum/update"/>
+		<acme:form-submit test="${command == 'show' and !notOwned}" 
+		code="authenticated.forum.form.button.delete" 
+		action="/authenticated/forum/delete"/>
+	<acme:form-submit test="${command == 'update' and !notOwned}" 
+		code="authenticated.forum.form.button.update" 
+		action="/authenticated/forum/update"/>
+	<acme:form-submit test="${command == 'update' and !notOwned}" 
+		code="authenticated.forum.form.button.delete" 
+		action="/authenticated/forum/delete"/>
+	<acme:form-return code="authenticated.forum.form.button.return"/>
 	
 </acme:form>

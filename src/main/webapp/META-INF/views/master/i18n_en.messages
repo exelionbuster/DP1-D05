@@ -49,11 +49,12 @@ master.menu.anonymous.bulletin.toledo.list	 	= Toledo's bulletins
 
 master.menu.authenticated 								= Authenticated
 master.menu.authenticated.investment-round.list-active 	= Active investment rounds
-master.menu.authenticated.forum.list					= Forums
 master.menu.authenticated.notice.list-active			= Active notices
 master.menu.authenticated.inquiry.list-active 			= Active inquiries
 master.menu.authenticated.overture.list-active 			= Active overtures
 master.menu.authenticated.challenge.list-active 		= Active challenges
+master.menu.authenticated.forum.list					= Forums
+master.menu.authenticated.forum.create					= New forum
 master.menu.authenticated.tool-record.list 				= Tools
 master.menu.authenticated.technology-record.list 		= Technologies
 

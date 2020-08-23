@@ -13,7 +13,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Past;
 
 import acme.entities.investmentRounds.InvestmentRound;
@@ -36,7 +35,6 @@ public class Forum extends DomainEntity {
 	@Past
 	private Date						creationDate;
 
-	@NotEmpty
 	@ElementCollection(targetClass = Authenticated.class, fetch = FetchType.EAGER)
 	private Collection<Authenticated>	involvedUsers;
 
