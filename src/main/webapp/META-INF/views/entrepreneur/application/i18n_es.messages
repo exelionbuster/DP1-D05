@@ -21,5 +21,9 @@ entrepreneur.application.form.label.accepted = Aceptado
 entrepreneur.application.form.label.rejected = Rechazado
 entrepreneur.application.form.label.offer = Oferta
 entrepreneur.application.form.label.investor = Inversor 
+entrepreneur.application.form.label.justification = Justificación
 	
 entrepreneur.application.form.button.return = Volver
+entrepreneur.application.form.button.update = Actualizar
+
+entrepreneur.application.error.justification = Es necesaria una justificación si la solicitud está rechazada
