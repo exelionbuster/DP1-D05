@@ -19,4 +19,5 @@
 	investor.application.form.label.status = Estado
 	investor.application.form.label.offer = Oferta
 	
+	investor.application.form.button.create = Crear
 	investor.application.form.button.return = Volver
