@@ -49,6 +49,8 @@ public class Application extends DomainEntity {
 
 	private Money				offer;
 
+	private String				justification;
+
 	// Relationships ------------------------------------------
 
 	@NotNull

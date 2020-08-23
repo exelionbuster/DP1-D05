@@ -881,6 +881,7 @@
 		<property name="offer">
 			<ref bean="money07"/>
 		</property>
+		<property name="justification" value=""/>
 		<property name="investor" ref="investor1Investor" />
 		<property name="investmentRound" ref="investmentRound1" />
 	</bean>
@@ -893,6 +894,7 @@
 		<property name="offer">
 			<ref bean="money06"/>
 		</property>
+		<property name="justification" value="Offer too low!"/>
 		<property name="investor" ref="investor2Investor" />
 		<property name="investmentRound" ref="investmentRound1" />
 	</bean>
@@ -905,6 +907,7 @@
 		<property name="offer">
 			<ref bean="money04"/>
 		</property>
+		<property name="justification" value=""/>
 		<property name="investor" ref="investor2Investor" />
 		<property name="investmentRound" ref="investmentRound2" />
 	</bean>
