@@ -109,6 +109,7 @@ master.menu.bookkeeper.investment-round.list-not-involved = Not involved investm
 
 master.menu.patron = Patron
 master.menu.patron.banner.list-mine = My banners
+master.menu.patron.banner.create = New banner
 
 # master.menu.user-account ####################################################
 

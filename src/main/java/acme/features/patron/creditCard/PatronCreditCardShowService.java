@@ -1,6 +1,8 @@
 
 package acme.features.patron.creditCard;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,7 +45,20 @@ public class PatronCreditCardShowService implements AbstractShowService<Patron, 
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "holderName", "number", "brand", "expirationDate", "cvv");
+		String expirationDate = "";
+		Date date = entity.getExpirationDate();
+		Integer year = date.getYear() + 1900;
+		Integer month = date.getMonth();
+		if (month < 10) {
+			expirationDate += "0";
+		}
+		expirationDate += month;
+		expirationDate += "/";
+		expirationDate += year;
+
+		model.setAttribute("ccDate", expirationDate);
+
+		request.unbind(entity, model, "holderName", "number", "brand", "cvv");
 
 	}
 

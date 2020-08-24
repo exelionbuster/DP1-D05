@@ -23,10 +23,22 @@ public class PatronBannerController extends AbstractController<Patron, Banner> {
 	@Autowired
 	private PatronBannerShowService		showService;
 
+	@Autowired
+	private PatronBannerCreateService	createService;
+
+	@Autowired
+	private PatronBannerUpdateService	updateService;
+
+	@Autowired
+	private PatronBannerDeleteService	deleteService;
+
 
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+		super.addBasicCommand(BasicCommand.DELETE, this.deleteService);
 
 		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listMineService);
 	}

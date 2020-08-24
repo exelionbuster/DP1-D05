@@ -17,11 +17,23 @@ import acme.framework.controllers.AbstractController;
 public class PatronCreditCardController extends AbstractController<Patron, CreditCard> {
 
 	@Autowired
-	private PatronCreditCardShowService showService;
+	private PatronCreditCardShowService		showService;
+
+	@Autowired
+	private PatronCreditCardCreateService	createService;
+
+	@Autowired
+	private PatronCreditCardUpdateService	updateService;
+
+	@Autowired
+	private PatronCreditCardDeleteService	deleteService;
 
 
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+		super.addBasicCommand(BasicCommand.DELETE, this.deleteService);
 	}
 }
