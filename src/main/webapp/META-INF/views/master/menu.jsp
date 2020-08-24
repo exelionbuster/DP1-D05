@@ -125,6 +125,10 @@
 				access="!hasRole('Consumer')" />
 			<acme:menu-suboption code="master.menu.user-account.consumer" action="/authenticated/consumer/update"
 				access="hasRole('Consumer')" />
+			<acme:menu-suboption code="master.menu.user-account.become-entrepreneur" action="/authenticated/entrepreneur/create"
+				access="!hasRole('Entrepreneur')" />
+			<acme:menu-suboption code="master.menu.user-account.entrepreneur" action="/authenticated/entrepreneur/update"
+				access="hasRole('Entrepreneur')" />
 			<acme:menu-suboption code="master.menu.user-account.become-patron" action="/authenticated/patron/create"
 				access="!hasRole('Patron')" />
 			<acme:menu-suboption code="master.menu.user-account.patron" action="/authenticated/patron/update"
