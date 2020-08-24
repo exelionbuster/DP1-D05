@@ -10,9 +10,8 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.forums;
+package acme.features.authenticated.forum;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,6 +22,7 @@ import acme.entities.forums.Forum;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -40,15 +40,10 @@ public class AuthenticatedForumShowService implements AbstractShowService<Authen
 	public boolean authorise(final Request<Forum> request) {
 		assert request != null;
 
-		int forumId;
-		Authenticated user;
+		Authenticated user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
+		Forum forum = this.repository.findOneById(request.getModel().getInteger("id"));
 
-		user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
-
-		forumId = request.getModel().getInteger("id");
-		Collection<Authenticated> users = this.repository.findOneById(forumId).getInvolvedUsers();
-
-		return users.contains(user);
+		return this.repository.isInvolved(forum, user);
 	}
 
 	@Override
@@ -57,7 +52,8 @@ public class AuthenticatedForumShowService implements AbstractShowService<Authen
 		assert entity != null;
 		assert model != null;
 
-		String forumOwner = entity.getOwner().getUserAccount().getUsername();
+		Principal principal = request.getPrincipal();
+		Authenticated forumOwner = entity.getOwner();
 		String users = "";
 
 		Set<Authenticated> involvedUsers = new HashSet<Authenticated>(entity.getInvolvedUsers());
@@ -75,8 +71,11 @@ public class AuthenticatedForumShowService implements AbstractShowService<Authen
 			model.setAttribute("invR", entity.getInvestmentRound().getTicker());
 		}
 
-		model.setAttribute("forumOwner", forumOwner);
+		model.setAttribute("notOwned", principal.getActiveRoleId() != forumOwner.getId());
+		model.setAttribute("forumOwner", forumOwner.getUserAccount().getUsername());
 		model.setAttribute("users", users);
+
+		model.setAttribute("hasMessages", this.repository.hasMessages(entity.getId()));
 
 		request.unbind(entity, model, "title", "creationDate");
 	}

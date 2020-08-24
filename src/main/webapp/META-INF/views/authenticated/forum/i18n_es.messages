@@ -16,9 +16,15 @@ authenticated.forum.form.label.title 			= Título:
 authenticated.forum.form.label.creation-date 	= Fecha de creación:
 authenticated.forum.form.label.owner 			= Dueño:
 authenticated.forum.form.label.users 			= Usuarios:
+authenticated.forum.form.label.users.owned		= Usuarios (nombres de usuario, separados por comas):
 authenticated.forum.form.label.investment-round = Ronda de inversión:
 
 authenticated.forum.form.label.no-inv-round		= Este foro no está asociado a ninguna ronda de inversión
 
+authenticated.forum.form.error.wrong-username	= Los siguientes nombres de usuario no existen o no pueden ser añadidos: 
+
 authenticated.forum.form.button.messages 		= Mensajes
+authenticated.forum.form.button.update			= Actualizar
+authenticated.forum.form.button.delete			= Eliminar
+authenticated.forum.form.button.create			= Crear
 authenticated.forum.form.button.return 			= Return

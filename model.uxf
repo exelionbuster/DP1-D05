@@ -771,7 +771,7 @@ m2=0..*
       <h>90</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Role&gt;&gt;
-Bookkeper
+Bookkeeper
 --
 + firmName: String {NotBlank}
 + responsibilityStatement: String {NotBlank}</panel_attributes>
@@ -886,7 +886,7 @@ Forum
 --
 + title: String {NotBlank}
 + creationMoment: Date {Temporal(TIMESTAMP), Past}
-+ involvedUsers: Collection&lt;Authenticated&gt; {NotEmpty}</panel_attributes>
++ involvedUsers: Collection&lt;Authenticated&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
