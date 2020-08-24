@@ -133,6 +133,10 @@
 				access="!hasRole('Patron')" />
 			<acme:menu-suboption code="master.menu.user-account.patron" action="/authenticated/patron/update"
 				access="hasRole('Patron')" />
+			<acme:menu-suboption code="master.menu.user-account.become-investor" action="/authenticated/investor/create"
+				access="!hasRole('Investor')" />
+			<acme:menu-suboption code="master.menu.user-account.investor" action="/authenticated/investor/update"
+				access="hasRole('Investor')" />
 				
 		</acme:menu-option>
 
