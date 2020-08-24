@@ -885,7 +885,7 @@ Forum
 --
 + title: String {NotBlank}
 + creationMoment: Date {Temporal(TIMESTAMP), Past}
-+ involvedUsers: Collection&lt;Authenticated&gt; {NotEmpty}</panel_attributes>
++ involvedUsers: Collection&lt;Authenticated&gt;</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

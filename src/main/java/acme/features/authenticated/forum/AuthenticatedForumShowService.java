@@ -75,6 +75,8 @@ public class AuthenticatedForumShowService implements AbstractShowService<Authen
 		model.setAttribute("forumOwner", forumOwner.getUserAccount().getUsername());
 		model.setAttribute("users", users);
 
+		model.setAttribute("hasMessages", this.repository.hasMessages(entity.getId()));
+
 		request.unbind(entity, model, "title", "creationDate");
 	}
 

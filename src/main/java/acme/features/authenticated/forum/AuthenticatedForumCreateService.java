@@ -12,8 +12,6 @@
 
 package acme.features.authenticated.forum;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,7 +62,7 @@ public class AuthenticatedForumCreateService implements AbstractCreateService<Au
 		Authenticated owner = this.repository.findUser(request.getPrincipal().getActiveRoleId());
 		request.getModel().setAttribute("forumOwner", owner.getUserAccount().getUsername());
 
-		Collection<Authenticated> users = new ArrayList<Authenticated>();
+		Set<Authenticated> users = new HashSet<Authenticated>();
 		users.add(owner);
 		entity.setInvolvedUsers(users);
 
@@ -92,32 +90,28 @@ public class AuthenticatedForumCreateService implements AbstractCreateService<Au
 		assert entity != null;
 		assert errors != null;
 
-		if (errors.hasErrors("title")) {
-			System.out.println("shana");
+		if (request.getModel().getAttribute("users") != "") {
+			Boolean hasWrongUsers = false;
+			String wrongUsers = "";
+			String[] usernames = ((String) request.getModel().getAttribute("users")).split(",");
+			for (String user : usernames) {
+				user = user.trim();
+				if (!user.equals("")) {
+					if (!this.repository.usernameExists(user) || user.equals(request.getPrincipal().getUsername())) {
+						if (!wrongUsers.isEmpty()) {
+							wrongUsers += ", ";
+						} else {
+							hasWrongUsers = true;
+						}
+						wrongUsers += user;
+					}
+				}
+			}
+			if (hasWrongUsers) {
+				errors.state(request, false, "users", "authenticated.forum.form.error.wrong-username");
+				errors.state(request, false, "users", " " + wrongUsers);
+			}
 		}
-		if (errors.hasErrors("creationDate")) {
-			System.out.println("fate");
-		}
-		if (errors.hasErrors("users")) {
-			System.out.println("sakura");
-		}
-		if (errors.hasErrors("forumOwner")) {
-			System.out.println("louise");
-		}
-		if (errors.hasErrors("invR")) {
-			System.out.println("shinobu");
-		}
-		if (errors.hasErrors("involvedUsers")) {
-			System.out.println("nanoha");
-			System.out.println(errors.getAllErrors("involvedUsers").toString());
-		}
-		if (errors.hasErrors("owner")) {
-			System.out.println("hibiki");
-		}
-		if (errors.hasErrors("investmentRound")) {
-			System.out.println("cory");
-		}
-
 	}
 
 	@Override

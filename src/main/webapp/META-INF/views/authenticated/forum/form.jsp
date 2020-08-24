@@ -13,7 +13,7 @@
 	</jstl:if>
 	<jstl:if test="${!notOwned}">
 		<acme:form-textbox code="authenticated.forum.form.label.title" path="title"/>
-		<acme:form-textbox code="authenticated.forum.form.label.users" path="users"/>
+		<acme:form-textbox code="authenticated.forum.form.label.users.owned" path="users"/>
 	</jstl:if>
 	<jstl:if test="${command != 'create'}">
 		<acme:form-moment code="authenticated.forum.form.label.creation-date" path="creationDate" readonly="true"/>

@@ -71,8 +71,9 @@ public class AuthenticatedForumUpdateService implements AbstractUpdateService<Au
 		model.setAttribute("forumOwner", forumOwner);
 		model.setAttribute("users", users);
 
-		request.unbind(entity, model, "title");
+		model.setAttribute("hasMessages", this.repository.hasMessages(entity.getId()));
 
+		request.unbind(entity, model, "title");
 	}
 
 	@Override
@@ -92,14 +93,27 @@ public class AuthenticatedForumUpdateService implements AbstractUpdateService<Au
 		assert entity != null;
 		assert errors != null;
 
-		String[] usernames = ((String) request.getModel().getAttribute("users")).split(",");
-		Boolean allUsersExist = true;
-		for (String user : usernames) {
-			allUsersExist = this.repository.findUserByUsername(user.trim()) != null;
-			if (!allUsersExist) {
-				break;
+		if (request.getModel().getAttribute("users") != "") {
+			Boolean hasWrongUsers = false;
+			String wrongUsers = "";
+			String[] usernames = ((String) request.getModel().getAttribute("users")).split(",");
+			for (String user : usernames) {
+				user = user.trim();
+				if (!user.equals("")) {
+					if (!this.repository.usernameExists(user) || user.equals(request.getPrincipal().getUsername())) {
+						if (!wrongUsers.isEmpty()) {
+							wrongUsers += ", ";
+						} else {
+							hasWrongUsers = true;
+						}
+						wrongUsers += user;
+					}
+				}
 			}
-
+			if (hasWrongUsers) {
+				errors.state(request, false, "users", "authenticated.forum.form.error.wrong-username");
+				errors.state(request, false, "users", " " + wrongUsers);
+			}
 		}
 	}
 

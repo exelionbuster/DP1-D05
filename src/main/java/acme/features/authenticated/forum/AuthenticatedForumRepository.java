@@ -23,10 +23,15 @@ public interface AuthenticatedForumRepository extends AbstractRepository {
 	@Query("select f from Forum f where f.id = ?1")
 	Forum findOneById(int id);
 
+	@Query("select count(m)>0 from Message m where m.forum.id = ?1")
+	Boolean hasMessages(int id);
+
 	@Query("select a from Authenticated a where a.id = ?1")
 	Authenticated findUser(int id);
 
 	@Query("select a from Authenticated a where a.userAccount.username = ?1")
 	Authenticated findUserByUsername(String username);
 
+	@Query("select count(ua)>0 from UserAccount ua where ua.username = ?1")
+	Boolean usernameExists(String username);
 }
