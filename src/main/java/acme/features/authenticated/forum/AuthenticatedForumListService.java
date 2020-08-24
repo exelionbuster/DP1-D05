@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.forums;
+package acme.features.authenticated.forum;
 
 import java.util.Collection;
 

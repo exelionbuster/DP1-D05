@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import acme.components.CustomCommand;
 import acme.entities.applications.Application;
 import acme.entities.roles.Entrepreneur;
 import acme.framework.components.BasicCommand;
@@ -20,10 +19,13 @@ public class EntrepreneurApplicationController extends AbstractController<Entrep
 	//	Internal states -------------
 
 	@Autowired
-	private EntrepreneurApplicationListByInvestmentRoundService	listByInvestmentRoundService;
+	private EntrepreneurApplicationListService	listService;
 
 	@Autowired
 	private EntrepreneurApplicationShowService					showService;
+
+	@Autowired
+	private EntrepreneurApplicationUpdateService				updateService;
 
 
 	//	Constructors ------
@@ -31,6 +33,8 @@ public class EntrepreneurApplicationController extends AbstractController<Entrep
 	@PostConstruct
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
-		super.addCustomCommand(CustomCommand.LIST_MINE, BasicCommand.LIST, this.listByInvestmentRoundService);
+		super.addBasicCommand(BasicCommand.LIST, this.listService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
+
 	}
 }
