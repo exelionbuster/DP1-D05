@@ -28,4 +28,7 @@ public interface AuthenticatedEntrepreneurRepository extends AbstractRepository 
 	@Query("select ua from UserAccount ua where ua.id = ?1")
 	UserAccount findOneUserAccountById(int id);
 
+	@Query("select c.activitySectors from Configuration c")
+	String findActivitySectors();
+
 }

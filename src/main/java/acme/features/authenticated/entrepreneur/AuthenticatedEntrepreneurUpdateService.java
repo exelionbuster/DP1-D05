@@ -12,6 +12,11 @@
 
 package acme.features.authenticated.entrepreneur;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +64,12 @@ public class AuthenticatedEntrepreneurUpdateService implements AbstractUpdateSer
 		assert entity != null;
 		assert model != null;
 
+		Set<String> sectors = new HashSet<String>(Arrays.asList(this.repository.findActivitySectors().split(";")));
+		sectors = sectors.stream().map(String::trim).collect(Collectors.toSet());
+		sectors.remove(entity.getActivitySector());
+
+		model.setAttribute("sectors", sectors);
+
 		request.unbind(entity, model, "startUpName", "activitySector", "qualifications", "skills");
 	}
 
@@ -83,6 +94,13 @@ public class AuthenticatedEntrepreneurUpdateService implements AbstractUpdateSer
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
+		Set<String> sectors = new HashSet<String>(Arrays.asList(this.repository.findActivitySectors().split(";")));
+		sectors = sectors.stream().map(String::trim).collect(Collectors.toSet());
+		if (entity.getActivitySector() != null) {
+			sectors.remove(entity.getActivitySector());
+		}
+		request.getModel().setAttribute("sectors", sectors);
 	}
 
 	@Override
