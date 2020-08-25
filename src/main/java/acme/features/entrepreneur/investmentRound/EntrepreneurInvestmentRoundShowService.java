@@ -23,6 +23,7 @@ import acme.entities.roles.Entrepreneur;
 import acme.features.entrepreneur.activity.EntrepreneurActivityRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -43,7 +44,19 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 	public boolean authorise(final Request<InvestmentRound> request) {
 		assert request != null;
 
-		return true;
+		boolean result;
+		int investmentRecordId;
+		InvestmentRound investmentRound;
+		Entrepreneur entrepreneur;
+		Principal principal;
+
+		investmentRecordId = request.getModel().getInteger("id");
+		investmentRound = this.repository.findOneById(investmentRecordId);
+		entrepreneur = investmentRound.getEntrepreneur();
+		principal = request.getPrincipal();
+		result = entrepreneur.getUserAccount().getId() == principal.getAccountId();
+
+		return result;
 	}
 
 	@Override
@@ -60,7 +73,7 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 			model.setAttribute("activities", null);
 		}
 
-		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link");
+		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link", "finalMode");
 
 	}
 

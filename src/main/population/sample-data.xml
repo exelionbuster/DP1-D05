@@ -791,6 +791,7 @@
 			<ref bean="money07"/>
 		</property>
 		<property name="link" value="https://www.google.com/"/>
+		<property name="finalMode" value="false"/>
 		<property name="entrepreneur" ref="entrepreneur1Entrepreneur"/>
 	</bean>
 	
@@ -804,6 +805,7 @@
 			<ref bean="money05"/>
 		</property>
 		<property name="link" value="https://www.google.com/"/>
+		<property name="finalMode" value="false"/>
 		<property name="entrepreneur" ref="entrepreneur2Entrepreneur"/>
 	</bean>
 	
@@ -817,6 +819,7 @@
 			<ref bean="money06"/>
 		</property>
 		<property name="link" value="https://www.google.com/"/>
+		<property name="finalMode" value="true"/>
 		<property name="entrepreneur" ref="entrepreneur2Entrepreneur"/>
 	</bean>
 	
