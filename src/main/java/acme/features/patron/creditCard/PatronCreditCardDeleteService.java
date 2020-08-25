@@ -4,18 +4,28 @@ package acme.features.patron.creditCard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.banners.Banner;
 import acme.entities.creditCards.CreditCard;
 import acme.entities.roles.Patron;
+import acme.features.authenticated.patron.AuthenticatedPatronRepository;
+import acme.features.patron.banner.PatronBannerRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractDeleteService;
 
 @Service
 public class PatronCreditCardDeleteService implements AbstractDeleteService<Patron, CreditCard> {
 
 	@Autowired
-	PatronCreditCardRepository repository;
+	PatronCreditCardRepository		repository;
+
+	@Autowired
+	AuthenticatedPatronRepository	patronRepository;
+
+	@Autowired
+	PatronBannerRepository			bannerRepository;
 
 
 	@Override
@@ -40,7 +50,7 @@ public class PatronCreditCardDeleteService implements AbstractDeleteService<Patr
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "holderName", "number", "brand", "expirationDate", "cvv");
+		request.unbind(entity, model, "holderName", "number", "brand", "cvv");
 
 	}
 
@@ -68,6 +78,21 @@ public class PatronCreditCardDeleteService implements AbstractDeleteService<Patr
 	public void delete(final Request<CreditCard> request, final CreditCard entity) {
 		assert request != null;
 		assert entity != null;
+
+		Patron p;
+		Principal principal = request.getPrincipal();
+		p = this.repository.findPatronByUserAccountId(principal.getAccountId());
+		p.setCreditCard(null);
+		entity.setPatron(null);
+
+		Banner b;
+		b = this.bannerRepository.findBannerByCreditCardId(entity.getId());
+		if (b != null) {
+			b.setCreditCard(null);
+			this.bannerRepository.save(b);
+		}
+
+		this.patronRepository.save(p);
 
 		this.repository.delete(entity);
 

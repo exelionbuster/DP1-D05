@@ -83,7 +83,6 @@ public class PatronCreditCardCreateService implements AbstractCreateService<Patr
 			dateFormat.setLenient(false);
 			date = dateFormat.parse(ccDate);
 		} catch (ParseException ex) {
-			ex.printStackTrace();
 		}
 		if (date == null) {
 			checkformat = false;
@@ -93,11 +92,13 @@ public class PatronCreditCardCreateService implements AbstractCreateService<Patr
 			errors.state(request, checkformat, "ccDate", "patron.credit-card.form.error.date-format");
 		}
 
-		//		Date now = new Date(System.currentTimeMillis());
-		//		if (!errors.hasErrors("expirationDate")) {
-		//			Boolean isAfter = entity.getExpirationDate().after(now);
-		//			errors.state(request, isAfter, "expirationDate", "administrator.credit-card.form.error.past-expiration-date");
-		//		}
+		if (checkformat) {
+			Date now = new Date(System.currentTimeMillis());
+			if (!errors.hasErrors("ccDate")) {
+				Boolean isAfter = date.after(now);
+				errors.state(request, isAfter, "ccDate", "patron.credit-card.form.error.past-expiration-date");
+			}
+		}
 
 	}
 
@@ -112,8 +113,6 @@ public class PatronCreditCardCreateService implements AbstractCreateService<Patr
 		try {
 			date = format.parse(ccDate);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		if (date != null) {
 			entity.setExpirationDate(date);

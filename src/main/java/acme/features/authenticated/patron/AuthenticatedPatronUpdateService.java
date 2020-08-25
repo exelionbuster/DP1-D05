@@ -55,6 +55,7 @@ public class AuthenticatedPatronUpdateService implements AbstractUpdateService<A
 
 		if (entity.getCreditCard() != null) {
 			model.setAttribute("hasCreditCard", true);
+			model.setAttribute("creditCardId", entity.getCreditCard().getId());
 		} else {
 			model.setAttribute("hasCreditCard", false);
 		}
@@ -95,6 +96,7 @@ public class AuthenticatedPatronUpdateService implements AbstractUpdateService<A
 
 			if (entity.getCreditCard() != null) {
 				request.getModel().setAttribute("hasCreditCard", true);
+				request.getModel().setAttribute("creditCardId", entity.getCreditCard().getId());
 			} else {
 				request.getModel().setAttribute("hasCreditCard", false);
 			}

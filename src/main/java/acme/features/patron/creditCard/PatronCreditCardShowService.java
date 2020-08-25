@@ -48,7 +48,7 @@ public class PatronCreditCardShowService implements AbstractShowService<Patron, 
 		String expirationDate = "";
 		Date date = entity.getExpirationDate();
 		Integer year = date.getYear() + 1900;
-		Integer month = date.getMonth();
+		Integer month = date.getMonth() + 1;
 		if (month < 10) {
 			expirationDate += "0";
 		}
