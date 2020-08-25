@@ -20,5 +20,15 @@ entrepreneur.investment-round.form.label.description = Descripción:
 entrepreneur.investment-round.form.label.amount = Cantidad:
 entrepreneur.investment-round.form.label.link = Enlace:
 
+entrepreneur.investment-round.form.label.finalMode = Público
+
+entrepreneur.investment-round.form.button.update = Actualizar
+entrepreneur.investment-round.form.button.create = Crear
+entrepreneur.investment-round.form.button.delete = Borrar
+entrepreneur.investment-round.form.button.publish = Publicar
+
+entrepreneur.investmentRound.error.applications = No se puede eliminar una ronda de inversión con aplicaciones
+entrepreneur.investmentRecord.error.amount = No se puede publicar a menos que los presupuestos de actividad en su programa de trabajo sumen la cantidad total de dinero en la ronda. 
+
 entrepreneur.investment-round.form.button.activities = Actividades
 entrepreneur.investment-round.form.button.return = Volver

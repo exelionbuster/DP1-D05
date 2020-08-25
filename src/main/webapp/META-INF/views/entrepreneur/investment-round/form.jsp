@@ -17,6 +17,25 @@
 		<acme:form-submit test="${command != 'create'}" method="get" code="entrepreneur.investment-round.form.button.activities" action="/entrepreneur/activity/list?id=${id}"/>
 	</jstl:if>
 	
+	<jstl:if test="${command != 'create'}">
+		<acme:form-checkbox code="entrepreneur.investment-round.form.label.finalMode" path="finalMode" readonly="true" />
+	</jstl:if>
+	
+	<acme:form-submit test="${command == 'create'}" code="entrepreneur.investment-round.form.button.create" action="/entrepreneur/investment-round/create" />
+	<jstl:if test="${finalMode == false}">
+		
+		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.publish" action="/entrepreneur/investment-round/publish" />
+	</jstl:if>
+	
+	<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />
+	<jstl:if test="${finalMode == false}">
+		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />
+	</jstl:if>
+	
+	<jstl:if test="${applications == 0}">
+		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
+	</jstl:if>
+	
 	<acme:form-return code="entrepreneur.investment-round.form.button.return" />
 		
 </acme:form>

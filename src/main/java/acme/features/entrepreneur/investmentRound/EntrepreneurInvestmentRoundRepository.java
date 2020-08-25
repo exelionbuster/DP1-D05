@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import acme.entities.activities.Activity;
 import acme.entities.configurations.Configuration;
 import acme.entities.investmentRounds.InvestmentRound;
+import acme.entities.roles.Entrepreneur;
 import acme.framework.repositories.AbstractRepository;
 
 @Repository
@@ -39,5 +40,11 @@ public interface EntrepreneurInvestmentRoundRepository extends AbstractRepositor
 
 	@Query("select a from Activity a where a.id = ?1")
 	Activity findActivityById(int id);
+
+	@Query("select count(a) from Application a where a.investmentRound.id = ?1")
+	Integer countApplicationsByInvestmentRound(int id);
+
+	@Query("select e from Entrepreneur e where e.id = ?1")
+	Entrepreneur findEntrepreneurById(int userAccountId);
 
 }

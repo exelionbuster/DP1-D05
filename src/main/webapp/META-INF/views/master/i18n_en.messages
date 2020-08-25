@@ -93,6 +93,7 @@ master.menu.consumer.favourite-link = Favourite link
 master.menu.entrepreneur = Entrepreneur
 master.menu.entrepreneur.investment-round = Investment rounds
 master.menu.entrepreneur.application.list = List applications by investment rounds
+master.menu.entrepreneur.investment-round.create = Create investment rounds
 
 # master.menu.investor ##########################################################
 
