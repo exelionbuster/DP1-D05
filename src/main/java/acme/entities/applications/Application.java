@@ -47,6 +47,7 @@ public class Application extends DomainEntity {
 	@Pattern(regexp = "^(pending|accepted|rejected)$")
 	private String				status;
 
+	@Valid
 	private Money				offer;
 
 	private String				justification;

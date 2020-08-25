@@ -205,7 +205,7 @@
 
 	<bean name="investor1Investor" class="acme.entities.roles.Investor">
 		<property name="firmName" value="Firm Name Investor 1" />
-		<property name="activitySector" value="Activity Sector Investor 1" />
+		<property name="activitySector" value="Technology" />
 		<property name="profile" value="Profile Investor 1" />
 		<property name="userAccount" ref="investor1UserAccount" />
 	</bean>
@@ -235,9 +235,9 @@
 
 	<bean name="investor2Investor" class="acme.entities.roles.Investor">
 		<property name="firmName" value="Firm Name Investor 2" />
-		<property name="activitySector" value="Activity Sector Investor 2" />
+		<property name="activitySector" value="Science" />
 		<property name="profile" value="Profile Investor 2" />
-		<property name="userAccount" ref="investor1UserAccount" />
+		<property name="userAccount" ref="investor2UserAccount" />
 	</bean>
 
 	<bean name="investor2Authenticated" class="acme.framework.entities.Authenticated">

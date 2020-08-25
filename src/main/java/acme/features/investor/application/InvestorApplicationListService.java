@@ -14,7 +14,7 @@ import acme.framework.entities.Principal;
 import acme.framework.services.AbstractListService;
 
 @Service
-public class InvestorApplicationListMineService implements AbstractListService<Investor, Application> {
+public class InvestorApplicationListService implements AbstractListService<Investor, Application> {
 
 	// Internal interface --------------------
 
