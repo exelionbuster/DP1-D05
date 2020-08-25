@@ -9,9 +9,12 @@
 # they accept any liabilities with respect to them.
 
 authenticated.patron.form.label.organisation = Organización:
-administrator.patron.form.label.activity-sector = Sector de actividad:
+authenticated.patron.form.label.activity-sector = Sector de actividad:
 authenticated.patron.form.label.profile = Perfil:
+authenticated.patron.form.label.credit-card = Tarjeta de crédito:
 
+authenticated.patron.form.button.create-credit-card = Nueva tarjeta de crédito
+authenticated.patron.form.button.show-credit-card = Mi tarjeta de crédito
 
 authenticated.patron.form.button.create = Registrarse
 authenticated.patron.form.button.update = Actualizar

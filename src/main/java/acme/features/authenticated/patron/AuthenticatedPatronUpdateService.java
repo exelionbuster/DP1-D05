@@ -53,6 +53,13 @@ public class AuthenticatedPatronUpdateService implements AbstractUpdateService<A
 
 		model.setAttribute("sectors", sectors);
 
+		if (entity.getCreditCard() != null) {
+			model.setAttribute("hasCreditCard", true);
+			model.setAttribute("creditCardId", entity.getCreditCard().getId());
+		} else {
+			model.setAttribute("hasCreditCard", false);
+		}
+
 		request.unbind(entity, model, "organisation", "activitySector", "profile");
 	}
 
@@ -78,13 +85,23 @@ public class AuthenticatedPatronUpdateService implements AbstractUpdateService<A
 		assert entity != null;
 		assert errors != null;
 
-		Set<String> sectors = new HashSet<String>(Arrays.asList(this.repository.findActivitySectors().split(";")));
-		sectors = sectors.stream().map(String::trim).collect(Collectors.toSet());
-		if (entity.getActivitySector() != null) {
-			sectors.remove(entity.getActivitySector());
-		}
+		if (errors.hasErrors()) {
 
-		request.getModel().setAttribute("sectors", sectors);
+			Set<String> sectors = new HashSet<String>(Arrays.asList(this.repository.findActivitySectors().split(";")));
+			sectors = sectors.stream().map(String::trim).collect(Collectors.toSet());
+			if (entity.getActivitySector() != null) {
+				sectors.remove(entity.getActivitySector());
+			}
+			request.getModel().setAttribute("sectors", sectors);
+
+			if (entity.getCreditCard() != null) {
+				request.getModel().setAttribute("hasCreditCard", true);
+				request.getModel().setAttribute("creditCardId", entity.getCreditCard().getId());
+			} else {
+				request.getModel().setAttribute("hasCreditCard", false);
+			}
+
+		}
 
 	}
 

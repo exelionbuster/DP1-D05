@@ -6,16 +6,17 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.banners.Banner;
 import acme.entities.roles.Patron;
+import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Principal;
-import acme.framework.services.AbstractShowService;
+import acme.framework.services.AbstractDeleteService;
 
 @Service
-public class PatronBannerShowService implements AbstractShowService<Patron, Banner> {
+public class PatronBannerDeleteService implements AbstractDeleteService<Patron, Banner> {
 
 	@Autowired
-	PatronBannerRepository respository;
+	PatronBannerRepository repository;
 
 
 	@Override
@@ -29,12 +30,21 @@ public class PatronBannerShowService implements AbstractShowService<Patron, Bann
 		Principal principal;
 
 		bannerId = request.getModel().getInteger("id");
-		banner = this.respository.findOneById(bannerId);
+		banner = this.repository.findOneById(bannerId);
 		patron = banner.getPatron();
 		principal = request.getPrincipal();
 		res = patron.getUserAccount().getId() == principal.getAccountId();
 
 		return res;
+	}
+
+	@Override
+	public void bind(final Request<Banner> request, final Banner entity, final Errors errors) {
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+
+		request.bind(entity, errors);
 	}
 
 	@Override
@@ -45,39 +55,35 @@ public class PatronBannerShowService implements AbstractShowService<Patron, Bann
 
 		request.unbind(entity, model, "picture", "slogan", "target");
 
-		if (entity.getPatron().getCreditCard() != null) {
-			model.setAttribute("hasCreditCard", true);
-
-			int id = entity.getPatron().getCreditCard().getId();
-			String number = entity.getPatron().getCreditCard().getNumber();
-
-			model.setAttribute("creditCardId", id);
-			model.setAttribute("creditCardNumber", number);
-
-		} else {
-
-			model.setAttribute("creditCardId", null);
-			model.setAttribute("hasCreditCard", false);
-		}
-
-		if (entity.getCreditCard() != null) {
-			model.setAttribute("bannerHasCC", true);
-		} else {
-			model.setAttribute("bannerHasCC", false);
-		}
-
 	}
 
 	@Override
 	public Banner findOne(final Request<Banner> request) {
 		assert request != null;
 
-		Banner res;
+		Banner result;
 		int id;
-		id = request.getModel().getInteger("id");
 
-		res = this.respository.findOneById(id);
-		return res;
+		id = request.getModel().getInteger("id");
+		result = this.repository.findOneById(id);
+
+		return result;
+	}
+
+	@Override
+	public void validate(final Request<Banner> request, final Banner entity, final Errors errors) {
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+
+	}
+
+	@Override
+	public void delete(final Request<Banner> request, final Banner entity) {
+		assert request != null;
+		assert entity != null;
+
+		this.repository.delete(entity);
 	}
 
 }

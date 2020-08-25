@@ -8,16 +8,21 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-patron.banner.list.slogan 				= Eslogan
-patron.banner.list.target 				= Objetivo
+patron.banner.list.slogan 						= Eslogan
+patron.banner.list.target 						= Objetivo
 
-patron.banner.form.label.picture 		= Imagen:
-patron.banner.form.label.slogan 		= Eslogan:
-patron.banner.form.label.target 		= Objetivo:
-patron.banner.form.label.credit-card 	= Tarjeta de crédito:
+patron.banner.form.label.picture 				= Imagen:
+patron.banner.form.label.slogan 				= Eslogan:
+patron.banner.form.label.target 				= Objetivo:
+patron.banner.form.label.credit-card 			= Tarjeta de crédito:
 
-patron.banner.form.credit-card.default	 = Ninguna
+patron.banner.form.credit-card.default	 		= Ninguna
 
-patron.banner.form.button.credit-card 	= Mostrar tarjeta de crédito
+patron.banner.form.button.credit-card 			= Mostrar tarjeta de crédito
+patron.banner.form.button.create-credit-card	= Nueva tarjeta de crédito
+patron.banner.form.label.no-credit-card			= No tiene una tarjeta de crédito registrada:
 
-patron.banner.form.button.return 		= Volver
+patron.banner.form.button.create 				= Crear
+patron.banner.form.button.update 				= Actualizar
+patron.banner.form.button.delete 				= Eliminar
+patron.banner.form.button.return 				= Volver

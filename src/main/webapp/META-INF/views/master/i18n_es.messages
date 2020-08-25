@@ -110,6 +110,7 @@ master.menu.bookkeeper.investment-round.list-not-involved = Rondas de inversión
 
 master.menu.patron = Patrocinador
 master.menu.patron.banner.list-mine = Mis banners
+master.menu.patron.banner.create = Nuevo banner
 
 # master.menu.user-account ####################################################
 
