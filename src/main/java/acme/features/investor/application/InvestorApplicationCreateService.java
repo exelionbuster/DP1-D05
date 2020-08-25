@@ -13,6 +13,7 @@
 package acme.features.investor.application;
 
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import acme.entities.applications.Application;
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Investor;
+import acme.features.authenticated.investmentRound.AuthenticatedInvestmentRoundRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -32,7 +34,10 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	InvestorApplicationRepository repository;
+	InvestorApplicationRepository			repository;
+
+	@Autowired
+	AuthenticatedInvestmentRoundRepository	investmentRoundRepository;
 
 
 	// AbstractCreateService<Administrator, Application> interface --------------
@@ -59,33 +64,29 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "ticker", "statement", "status", "offer");
-		model.setAttribute("id", entity.getInvestmentRound().getId());
+		request.unbind(entity, model, "ticker", "statement", "offer");
+		model.setAttribute("investmentRoundId", entity.getInvestmentRound().getId());
 
 	}
 
 	@Override
 	public Application instantiate(final Request<Application> request) {
 		Application result;
-		Investor investor;
+
+		Date creationDate;
+		InvestmentRound investmentRound;
 		Principal principal;
 
-		InvestmentRound investmentRound = this.repository.findOneInvestmentRoundById(request.getModel().getInteger("investmentRoundId"));
+		creationDate = new Date(System.currentTimeMillis() - 1);
+		investmentRound = this.investmentRoundRepository.findOneById(Integer.parseInt((String) request.getModel().getAttribute("investmentRoundId")));
 		principal = request.getPrincipal();
-		int principalId = principal.getAccountId();
-
-		investor = this.repository.findOneInvestorByUserAccountId(principalId);
-
-		Date moment;
-		moment = new Date(System.currentTimeMillis() - 1);
+		Investor investor = this.repository.findOneInvestorByUserAccountId(principal.getAccountId());
 
 		result = new Application();
-		result.setCreationDate(moment);
-		result.setInvestor(investor);
+		result.setCreationDate(creationDate);
+		result.setStatus("pending");
 		result.setInvestmentRound(investmentRound);
-
-		String status = "pending";
-		result.setStatus(status);
+		result.setInvestor(investor);
 
 		return result;
 	}
@@ -96,9 +97,76 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert entity != null;
 		assert errors != null;
 
-		//TODO: para que sirve esto?
-		//		errors.state(request, !this.repository.checkUniqueReference(entity.getReferenceNumber()), "referenceNumber", "worker.application.error.unique-reference");
+		if (errors.hasErrors("offer")) {
+			errors.state(request, false, "offer", "investor.application.form.error.null-currency");
+		} else {
+			errors.state(request, entity.getOffer().getCurrency().equals("€"), "offer", "investor.application.form.error.null-currency");
+		}
 
+		if (!errors.hasErrors("ticker")) {
+			Boolean validTicker = false;
+
+			//validación
+			String ticker = entity.getTicker();
+			String[] parts = ticker.split("-");
+			Boolean tieneTresPartes = false;
+			if (parts.length == 3) {
+				tieneTresPartes = true;
+				String part1 = parts[0];
+				String part2 = parts[1];
+				String part3 = parts[2];
+				String regexp1 = "\\d{6}";
+
+				Boolean correctActivitySector = false;
+				String checkActivitySector = entity.getInvestor().getActivitySector();
+				if (checkActivitySector.length() == 1) {
+					checkActivitySector = checkActivitySector + "XX";
+				} else if (checkActivitySector.length() == 2) {
+					checkActivitySector = checkActivitySector + "X";
+				} else {
+					checkActivitySector = checkActivitySector.substring(0, 3);
+				}
+
+				if (part1.equals(checkActivitySector.toUpperCase())) {
+					correctActivitySector = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "investor.application.error.ticker.activity-sector");
+				}
+
+				Boolean correctYear = false;
+				int year = entity.getCreationDate().getYear();
+				String checkYear = "" + year + "";
+
+				if (checkYear.length() >= 3) {
+					checkYear = checkYear.substring(checkYear.length() - 2, checkYear.length());
+				}
+
+				if (part2.equals(checkYear)) {
+					correctYear = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "investor.application.error.ticker.year");
+				}
+
+				Boolean correctDigits = false;
+				if (Pattern.matches(regexp1, part3)) {
+					correctDigits = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "investor.application.error.ticker.digits");
+				}
+
+				if (correctActivitySector && correctYear && correctDigits) {
+					validTicker = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "investor.application.error.ticker");
+				}
+			} else {
+				errors.state(request, tieneTresPartes, "ticker", "investor.application.error.ticker");
+			}
+
+			if (validTicker) {
+				errors.state(request, !this.repository.checkUniqueTicker(entity.getTicker()), "ticker", "investor.application.error.unique-ticker");
+			}
+		}
 	}
 
 	@Override
@@ -107,9 +175,15 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 		assert entity != null;
 
 		Date creationDate;
+		int principalId;
 
 		creationDate = new Date(System.currentTimeMillis() - 1);
+		principalId = request.getPrincipal().getAccountId();
+		Investor investor = this.repository.findOneInvestorByUserAccountId(principalId);
+
 		entity.setCreationDate(creationDate);
+		entity.setInvestor(investor);
+
 		this.repository.save(entity);
 	}
 

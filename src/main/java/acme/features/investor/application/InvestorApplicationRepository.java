@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.entities.applications.Application;
-import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Investor;
 import acme.framework.repositories.AbstractRepository;
 
@@ -23,7 +22,7 @@ public interface InvestorApplicationRepository extends AbstractRepository {
 	@Query("select i from Investor i where i.userAccount.id = ?1")
 	Investor findOneInvestorByUserAccountId(int id);
 
-	@Query("select ir from InvestmentRound ir where ir.id=?1")
-	InvestmentRound findOneInvestmentRoundById(int id);
+	@Query("select count(a)>0 from Application a where a.ticker = ?1")
+	Boolean checkUniqueTicker(String ticker);
 
 }

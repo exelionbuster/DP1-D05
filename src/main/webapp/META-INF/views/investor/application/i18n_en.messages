@@ -21,3 +21,10 @@
 	
 	investor.application.form.button.create = Create
 	investor.application.form.button.return = Return
+	
+	investor.application.form.error.null-currency = The amount and currency (€) must be specified
+	investor.application.error.unique-ticker = This ticker already exists
+	investor.application.error.ticker = The ticker must follow the pattern SSS-YY-NNNNNN
+	investor.application.error.ticker.year = YY on SSS-YY-NNNNNN must coincide with the last two digits of the year of the creation date
+	investor.application.error.ticker.activity-sector = SSS on SSS-YY-NNNNNN must be upper and coincide with the firts three letters of the activity sector of the investor
+	investor.application.error.ticker.digits = NNNNNN on SSS-YY-NNNNNN must be six digits

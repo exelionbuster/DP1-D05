@@ -62,6 +62,13 @@ public class AuthenticatedInvestmentRoundShowService implements AbstractShowServ
 
 		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link");
 
+		Boolean isInvestor = false;
+
+		if (this.repository.isInvestor(request.getPrincipal().getAccountId())) {
+			isInvestor = true;
+		}
+		model.setAttribute("isInvestor", isInvestor);
+
 	}
 
 	@Override
