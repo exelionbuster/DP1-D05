@@ -103,14 +103,14 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		// InvestmentRecord no se puede salvar si a menos que las activities budgets wirkprogramme sum up to the total amount of money
 		if (request.getModel().getBoolean("finalMode") == true) {
 			if (!errors.hasErrors("finalMode")) {
-				Boolean b;
+				boolean b = false;
 				Double acum = 0.0;
 				Collection<Activity> activities = this.repository.findActivityByInvestmentRound(entity.getId());
 				for (Activity a : activities) {
 					acum += a.getBudget().getAmount();
 				}
 				b = acum.equals(entity.getAmount().getAmount());
-
+				errors.state(request, b, "finalMode", "entrepreneur.investmentRecord.error.amount");
 			}
 		}
 
