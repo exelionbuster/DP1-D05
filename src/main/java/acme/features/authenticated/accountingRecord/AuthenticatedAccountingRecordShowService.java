@@ -1,20 +1,20 @@
 
-package acme.features.bookkeeper.accountingRecord;
+package acme.features.authenticated.accountingRecord;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.accountingRecords.AccountingRecord;
-import acme.entities.roles.Bookkeeper;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Authenticated;
 import acme.framework.services.AbstractShowService;
 
 @Service
-public class BookkeeperAccountingRecordShowService implements AbstractShowService<Bookkeeper, AccountingRecord> {
+public class AuthenticatedAccountingRecordShowService implements AbstractShowService<Authenticated, AccountingRecord> {
 
 	@Autowired
-	BookkeeperAccountingRecordRepository repository;
+	AuthenticatedAccountingRecordRepository repository;
 
 
 	@Override
@@ -30,15 +30,6 @@ public class BookkeeperAccountingRecordShowService implements AbstractShowServic
 		assert model != null;
 
 		request.unbind(entity, model, "title", "creationDate", "status", "body");
-
-		boolean isPublished = false;
-
-		if (!entity.isDraft()) {
-			isPublished = true;
-		}
-		model.setAttribute("isPublished", isPublished);
-
-		model.setAttribute("published", isPublished);
 
 	}
 

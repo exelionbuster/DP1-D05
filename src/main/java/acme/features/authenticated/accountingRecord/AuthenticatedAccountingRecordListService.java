@@ -1,5 +1,5 @@
 
-package acme.features.bookkeeper.accountingRecord;
+package acme.features.authenticated.accountingRecord;
 
 import java.util.Collection;
 
@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.accountingRecords.AccountingRecord;
 import acme.entities.investmentRounds.InvestmentRound;
-import acme.entities.roles.Bookkeeper;
 import acme.features.bookkeeper.investmentRound.BookkeeperInvestmentRoundRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Authenticated;
 import acme.framework.services.AbstractListService;
 
 @Service
-public class BookkeeperAccountingRecordListService implements AbstractListService<Bookkeeper, AccountingRecord> {
+public class AuthenticatedAccountingRecordListService implements AbstractListService<Authenticated, AccountingRecord> {
 
 	@Autowired
-	BookkeeperAccountingRecordRepository	repository;
+	AuthenticatedAccountingRecordRepository	repository;
 
 	@Autowired
 	BookkeeperInvestmentRoundRepository		investmentRepository;
@@ -44,8 +44,8 @@ public class BookkeeperAccountingRecordListService implements AbstractListServic
 		assert request != null;
 
 		Collection<AccountingRecord> res;
-		InvestmentRound ir = this.investmentRepository.findOneById(request.getModel().getInteger("invRId"));
-		res = this.repository.findManyByInvestmentRound(ir.getId(), request.getPrincipal().getActiveRoleId());
+		InvestmentRound ir = this.investmentRepository.findOneById(request.getModel().getInteger("investmentRoundId"));
+		res = this.repository.findAllByInvestmentRoundId(ir.getId());
 
 		return res;
 	}

@@ -21,6 +21,10 @@
 	<acme:form-return code="authenticated.investment-round.form.button.apply" action="/investor/application/create?investmentRoundId=${id}"/>
 	</jstl:if>
 	
+	<jstl:if test="${accountingRecords != null}">
+	<acme:form-return code="authenticated.investment-round.form.button.accounting-records" action="/authenticated/accounting-record/list?investmentRoundId=${id}"/>
+	</jstl:if>
+	
 	<acme:form-return code="authenticated.investment-round.form.button.return" />
 		
 </acme:form>

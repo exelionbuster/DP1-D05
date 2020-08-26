@@ -82,6 +82,8 @@ public class AdministratorNoticeCreateService implements AbstractCreateService<A
 		assert request != null;
 		assert entity != null;
 
+		request.getModel().getBoolean("surmanuqui");
+
 		Date creationDate = new Date(System.currentTimeMillis() - 1);
 		entity.setCreationDate(creationDate);
 		this.repository.save(entity);
