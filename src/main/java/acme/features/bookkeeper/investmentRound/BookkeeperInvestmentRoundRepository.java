@@ -15,7 +15,7 @@ public interface BookkeeperInvestmentRoundRepository extends AbstractRepository 
 	@Query("select distinct ar.investmentRound from AccountingRecord ar where ar.bookkeeper.id=?1")
 	Collection<InvestmentRound> findInvolvedInvestmentRound(int id);
 
-	@Query("select distinct ar.investmentRound from AccountingRecord ar where ar.bookkeeper.id<>?1")
+	@Query("select distinct ir from InvestmentRound ir where not exists (select ar from AccountingRecord ar where ar.investmentRound = ir and ar.bookkeeper.id=?1)")
 	Collection<InvestmentRound> findNotInvolvedInvestmentRound(int id);
 
 	@Query("select count(a)>0 from Activity a where a.investmentRound.id=?1")
