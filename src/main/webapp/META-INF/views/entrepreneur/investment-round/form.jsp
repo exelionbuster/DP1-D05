@@ -3,10 +3,13 @@
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<acme:form readonly="true">
-
+<acme:form>
 	<acme:form-textbox code="entrepreneur.investment-round.form.label.ticker" path="ticker"/>
-	<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate"/>
+	
+	<jstl:if test="${command != 'create'}">
+		<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate"/>
+	</jstl:if>
+	
 	<acme:form-textbox code="entrepreneur.investment-round.form.label.kind" path="kind"/>	
 	<acme:form-textbox code="entrepreneur.investment-round.form.label.title" path="title"/>
 	<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description"/>

@@ -47,4 +47,7 @@ public interface EntrepreneurInvestmentRoundRepository extends AbstractRepositor
 	@Query("select e from Entrepreneur e where e.id = ?1")
 	Entrepreneur findEntrepreneurById(int userAccountId);
 
+	@Query("select count(i)>0 from InvestmentRound i where i.ticker = ?1")
+	Boolean checkUniqueTicker(String ticker);
+
 }
