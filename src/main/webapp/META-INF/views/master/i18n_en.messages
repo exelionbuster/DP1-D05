@@ -73,6 +73,7 @@ master.menu.administrator.technology-record.list 	= Technologies
 master.menu.administrator.technology-record.create 	= New technology
 master.menu.administrator.tool-record.list 			= Tools
 master.menu.administrator.tool-record.create 		= New tool
+master.menu.administrator.bookkeeper-request.list	= Bookkeeper requests
 master.menu.administrator.dashboard					= Dashboard
 master.menu.administrator.user-accounts 			= User accounts
 master.menu.administrator.configuration 			= Configuration
@@ -126,6 +127,7 @@ master.menu.user-account.become-patron = Become a patron
 master.menu.user-account.patron = Patron data
 master.menu.user-account.become-investor = Become a investor
 master.menu.user-account.investor = Investor data
+master.menu.user-account.bookkeeper-request = Become a bookkeeper
 
 # master.footer ###############################################################
 

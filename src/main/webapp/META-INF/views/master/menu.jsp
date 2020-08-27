@@ -76,6 +76,8 @@
 			<acme:menu-suboption code="master.menu.administrator.tool-record.list" action="/administrator/tool-record/list" />
 			<acme:menu-suboption code="master.menu.administrator.tool-record.create" action="/administrator/tool-record/create" />
 			<acme:menu-separator />
+			<acme:menu-suboption code="master.menu.administrator.bookkeeper-request.list" action="/administrator/bookkeeper-request/list" />
+			<acme:menu-separator />
 			<acme:menu-suboption code="master.menu.administrator.dashboard" action="/administrator/dashboard/show" />
 			<acme:menu-suboption code="master.menu.administrator.user-accounts" action="/administrator/user-account/list" />
 			<acme:menu-suboption code="master.menu.administrator.configuration" action="/administrator/configuration/show" />
@@ -138,6 +140,8 @@
 				access="!hasRole('Investor')" />
 			<acme:menu-suboption code="master.menu.user-account.investor" action="/authenticated/investor/update"
 				access="hasRole('Investor')" />
+			<acme:menu-suboption code="master.menu.user-account.bookkeeper-request" action="/authenticated/bookkeeper-request/create"
+				access="!hasRole('Bookkeeper')" />
 				
 		</acme:menu-option>
 
