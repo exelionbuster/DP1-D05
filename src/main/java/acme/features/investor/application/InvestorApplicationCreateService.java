@@ -46,7 +46,12 @@ public class InvestorApplicationCreateService implements AbstractCreateService<I
 	public boolean authorise(final Request<Application> request) {
 		assert request != null;
 
-		return true;
+		boolean res;
+		int id = request.getModel().getInteger("investmentRoundId");
+		InvestmentRound ir = this.investmentRoundRepository.findOneById(id);
+		res = ir.isFinalMode();
+
+		return res;
 	}
 
 	@Override
