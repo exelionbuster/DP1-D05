@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.forums.Forum;
-import acme.features.authenticated.messages.AuthenticatedMessageRepository;
+import acme.features.authenticated.message.AuthenticatedMessageRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -48,6 +48,8 @@ public class AuthenticatedForumDeleteService implements AbstractDeleteService<Au
 		assert entity != null;
 		assert model != null;
 
+		request.getModel().setAttribute("hasMessages", this.repository.hasMessages(entity.getId()));
+
 		request.unbind(entity, model);
 	}
 
@@ -66,6 +68,11 @@ public class AuthenticatedForumDeleteService implements AbstractDeleteService<Au
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
+		if (entity.getInvestmentRound() != null) {
+			errors.state(request, false, "invR", "authenticated.forum.form.error.has-inv-round");
+			request.getModel().setAttribute("hasMessages", this.repository.hasMessages(entity.getId()));
+		}
 	}
 
 	@Override

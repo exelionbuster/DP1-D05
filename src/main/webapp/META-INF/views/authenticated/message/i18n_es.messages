@@ -8,7 +8,6 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-
 authenticated.message.list.label.title 			= Título
 authenticated.message.list.label.creation-date 	= Fecha 
 authenticated.message.list.label.sender 		= Remitente
@@ -19,6 +18,10 @@ authenticated.message.form.label.sender 		= Remitente:
 authenticated.message.form.label.tags 			= Eitquetas:
 authenticated.message.form.label.body 			= Cuerpo:
 
+authenticated.message.form.button.checkbox 		= Acepto que los mensajes no pueden ser editados o eliminados
 authenticated.message.form.no-tags 				= Este mensaje no tiene etiquetas
 
+authenticated.message.form.error.must-accept	= Dado que los mensajes no pueden ser editados o eliminados, debe aceptar estas condiciones antes de enviarlo
+
+authenticated.message.form.button.create		= Enviar mensaje
 authenticated.message.form.button.return 		= Volver

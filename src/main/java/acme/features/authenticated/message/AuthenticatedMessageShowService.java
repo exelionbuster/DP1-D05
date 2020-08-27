@@ -10,14 +10,13 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.messages;
-
-import java.util.Collection;
+package acme.features.authenticated.message;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.messages.Message;
+import acme.features.authenticated.forum.AuthenticatedForumRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
@@ -29,25 +28,23 @@ public class AuthenticatedMessageShowService implements AbstractShowService<Auth
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AuthenticatedMessageRepository repository;
+	AuthenticatedMessageRepository	repository;
+
+	@Autowired
+	AuthenticatedForumRepository	forumRepository;
 
 
-	// AbstractListService<Authenticated, Inquiry> interface --------------
+	// AbstractListService<Authenticated, Message> interface --------------
 
 	@Override
 	public boolean authorise(final Request<Message> request) {
 		assert request != null;
 
-		Message msg;
-		Authenticated user;
+		Authenticated user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
 
-		user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
+		Message msg = this.repository.findOneById(request.getModel().getInteger("id"));
 
-		msg = this.repository.findOneById(request.getModel().getInteger("id"));
-
-		Collection<Authenticated> users = msg.getForum().getInvolvedUsers();
-
-		return users.contains(user);
+		return this.forumRepository.isInvolved(msg.getForum(), user);
 	}
 
 	@Override
@@ -56,6 +53,7 @@ public class AuthenticatedMessageShowService implements AbstractShowService<Auth
 		assert entity != null;
 		assert model != null;
 
+		Boolean owned = false;
 		String msgSender = entity.getSender().getUserAccount().getUsername();
 
 		if (entity.getTags().isEmpty()) {
@@ -64,7 +62,12 @@ public class AuthenticatedMessageShowService implements AbstractShowService<Auth
 			model.setAttribute("msgTags", entity.getTags());
 		}
 
+		if (entity.getSender().equals(this.repository.findUser(request.getPrincipal().getActiveRoleId()))) {
+			owned = true;
+		}
+
 		model.setAttribute("msgSender", msgSender);
+		model.setAttribute("owned", owned);
 
 		request.unbind(entity, model, "title", "creationDate", "body");
 	}
