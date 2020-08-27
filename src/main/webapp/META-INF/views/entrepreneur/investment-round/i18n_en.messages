@@ -34,6 +34,8 @@ entrepreneur.investment-round.error.ticker = The ticker must follow the pattern 
 entrepreneur.investment-round.error.ticker.year = YY on SSS-YY-NNNNNN must coincide with the last two digits of the year of the creation date
 entrepreneur.investment-round.error.ticker.activity-sector = SSS on SSS-YY-NNNNNN must be upper and coincide with the firts three letters of the activity sector of the entrepreneur
 entrepreneur.investment-round.error.ticker.digits = NNNNNN on SSS-YY-NNNNNN must be six digits  
+entrepreneur.investment-round.error.amount = Activity budgets must add up to the total amount of the investment round
+entrepreneur.investment-round.error.applications = An investment round that has at least one apply cannot be deleted
 
 entrepreneur.investment-round.form.button.activities = Activities
 entrepreneur.investment-round.form.button.return = Return

@@ -4,40 +4,61 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <acme:form>
-	<acme:form-textbox code="entrepreneur.investment-round.form.label.ticker" path="ticker"/>
+
+	<jstl:if test="${!isFinalMode}">
 	
-	<jstl:if test="${command != 'create'}">
-		<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate"/>
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.title" path="title"/>
+	
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.ticker" path="ticker"/>
+	
+		<jstl:if test="${command != 'create'}">
+			<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate" readonly="true"/>
+		</jstl:if>
+	
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.kind" path="kind"/>	
+		<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description"/>
+		<acme:form-money code="entrepreneur.investment-round.form.label.amount" path="amount"/>
+		<acme:form-url code="entrepreneur.investment-round.form.label.link" path="link"/>
+	
+		<jstl:if test="${command != 'create'}">
+			<acme:form-checkbox code="entrepreneur.investment-round.form.label.finalMode" path="finalMode"/>
+		</jstl:if>
+	
+		<acme:form-submit test="${command == 'create'}" code="entrepreneur.investment-round.form.button.create" action="/entrepreneur/investment-round/create" />
+		<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />
+		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />	
+	
 	</jstl:if>
 	
-	<acme:form-textbox code="entrepreneur.investment-round.form.label.kind" path="kind"/>	
-	<acme:form-textbox code="entrepreneur.investment-round.form.label.title" path="title"/>
-	<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description"/>
-	<acme:form-money code="entrepreneur.investment-round.form.label.amount" path="amount"/>
-	<acme:form-url code="entrepreneur.investment-round.form.label.link" path="link"/>
+	<jstl:if test="${isFinalMode}">
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.title" path="title" readonly="true"/>
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.ticker" path="ticker" readonly="true"/>
 	
+		<jstl:if test="${command != 'create'}">
+			<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate" readonly="true"/>
+		</jstl:if>
+	
+		<!-- el desplegable va aquí -->
+	
+		<jstl:if test="${command !=create}">
+			<acme:form-option code="${activitySector}" value="${activitySector}"/>
+		</jstl:if>
+		<jstl:forEach items="${sectors}"  var="sector">
+			<acme:form-option code="${sector}" value="${sector}"/>
+		</jstl:forEach>	
+		
+		<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description" readonly="true"/>
+		<acme:form-money code="entrepreneur.investment-round.form.label.amount" path="amount" readonly="true"/>
+		<acme:form-url code="entrepreneur.investment-round.form.label.link" path="link" readonly="true"/>
+	</jstl:if>
+
 	<jstl:if test="${activities != null}">
 		<acme:form-submit test="${command != 'create'}" method="get" code="entrepreneur.investment-round.form.button.activities" action="/entrepreneur/activity/list?id=${id}"/>
 	</jstl:if>
-	
-	<jstl:if test="${command != 'create'}">
-		<acme:form-checkbox code="entrepreneur.investment-round.form.label.finalMode" path="finalMode" readonly="true" />
-	</jstl:if>
-	
-	<acme:form-submit test="${command == 'create'}" code="entrepreneur.investment-round.form.button.create" action="/entrepreneur/investment-round/create" />
-	<jstl:if test="${finalMode == false}">
-		
-		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.publish" action="/entrepreneur/investment-round/publish" />
-	</jstl:if>
-	
-	<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />
-	<jstl:if test="${finalMode == false}">
-		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.update" action="/entrepreneur/investment-round/update" />
-	</jstl:if>
-	
-	<jstl:if test="${applications == 0}">
-		<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
-	</jstl:if>
+
+	<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete"/>
+	<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
+	<acme:form-submit test="${command == 'delete'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
 	
 	<acme:form-return code="entrepreneur.investment-round.form.button.return" />
 		

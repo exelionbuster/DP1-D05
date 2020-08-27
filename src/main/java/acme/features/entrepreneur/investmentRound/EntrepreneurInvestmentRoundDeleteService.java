@@ -9,7 +9,6 @@ import acme.entities.roles.Entrepreneur;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
-import acme.framework.entities.Principal;
 import acme.framework.services.AbstractDeleteService;
 
 @Service
@@ -25,23 +24,7 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 	public boolean authorise(final Request<InvestmentRound> request) {
 		assert request != null;
 
-		boolean result;
-		int investmentRoundId;
-		InvestmentRound investmentRound;
-		Entrepreneur entrepreneur;
-		Principal principal;
-
-		investmentRoundId = request.getModel().getInteger("id");
-		investmentRound = this.repository.findOneById(investmentRoundId);
-		entrepreneur = investmentRound.getEntrepreneur();
-		principal = request.getPrincipal();
-
-		boolean finalMode;
-		finalMode = investmentRound.isFinalMode();
-
-		result = entrepreneur.getUserAccount().getId() == principal.getAccountId() && !finalMode;
-
-		return result;
+		return true;
 	}
 
 	@Override
@@ -84,12 +67,13 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 		assert errors != null;
 
 		// Validar si no tiene applications
-		Integer applications;
-		applications = this.repository.countApplicationsByInvestmentRound(entity.getId());
-		Boolean hasApplicattions;
-		hasApplicattions = applications != 0;
-		if (!errors.hasErrors()) {
-			errors.state(request, !hasApplicattions, "*", "entrepreneur.investmentRound.error.applications");
+		boolean hasApplication = this.repository.hasApplications(entity.getId());
+		if (!errors.hasErrors("link")) {
+			errors.state(request, !hasApplication, "link", "entrepreneur.investment-round.error.applications");
+		}
+
+		if (errors.hasErrors()) {
+			request.getModel().setAttribute("isFinalMode", entity.isFinalMode());
 		}
 
 	}

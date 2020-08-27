@@ -73,7 +73,9 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 			model.setAttribute("activities", null);
 		}
 
-		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link", "finalMode");
+		request.unbind(entity, model, "ticker", "kind", "creationDate", "title", "description", "amount", "link");
+
+		model.setAttribute("isFinalMode", entity.isFinalMode());
 
 	}
 

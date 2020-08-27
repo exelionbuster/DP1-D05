@@ -47,8 +47,9 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "ticker", "kind", "title", "description", "amount", "link", "finalMode");
+		request.unbind(entity, model, "ticker", "kind", "title", "description", "amount", "link");
 
+		model.setAttribute("isFinalMode", false);
 	}
 
 	@Override
@@ -77,6 +78,9 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 
 	@Override
 	public void validate(final Request<InvestmentRound> request, final InvestmentRound entity, final Errors errors) {
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
 
 		if (!errors.hasErrors("ticker")) {
 			Boolean validTicker = false;

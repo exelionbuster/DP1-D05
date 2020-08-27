@@ -41,13 +41,16 @@ public interface EntrepreneurInvestmentRoundRepository extends AbstractRepositor
 	@Query("select a from Activity a where a.id = ?1")
 	Activity findActivityById(int id);
 
-	@Query("select count(a) from Application a where a.investmentRound.id = ?1")
-	Integer countApplicationsByInvestmentRound(int id);
+	@Query("select count(a)>0 from Application a where a.investmentRound.id = ?1")
+	boolean hasApplications(int id);
 
 	@Query("select e from Entrepreneur e where e.id = ?1")
 	Entrepreneur findEntrepreneurById(int userAccountId);
 
 	@Query("select count(i)>0 from InvestmentRound i where i.ticker = ?1")
 	Boolean checkUniqueTicker(String ticker);
+
+	@Query("select sum(a.budget.amount)=a.investmentRound.amount.amount from Activity a where a.investmentRound.id = ?1")
+	boolean checkAmount(int id);
 
 }

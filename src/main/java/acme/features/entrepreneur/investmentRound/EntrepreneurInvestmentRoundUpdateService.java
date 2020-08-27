@@ -2,6 +2,7 @@
 package acme.features.entrepreneur.investmentRound;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +80,7 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 
 		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link", "finalMode");
 
+		model.setAttribute("isFinalMode", entity.isFinalMode());
 	}
 
 	@Override
@@ -114,6 +116,21 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 			}
 		}
 
+		if (!errors.hasErrors("finalMode")) {
+			boolean validAmount = false;
+
+			if (this.repository.checkAmount(entity.getId()) && entity.isFinalMode()) {
+				validAmount = true;
+			} else {
+				errors.state(request, validAmount, "finalMode", "entrepreneur.investment-round.error.amount");
+			}
+
+		}
+
+		if (errors.hasErrors()) {
+			request.getModel().setAttribute("isFinalMode", entity.isFinalMode());
+		}
+
 		// Detectar que las cadenas no son spam
 
 	}
@@ -122,6 +139,12 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 	public void update(final Request<InvestmentRound> request, final InvestmentRound entity) {
 		assert request != null;
 		assert entity != null;
+
+		Date creationDate;
+
+		creationDate = new Date(System.currentTimeMillis() - 1);
+
+		entity.setCreationDate(creationDate);
 
 		this.repository.save(entity);
 

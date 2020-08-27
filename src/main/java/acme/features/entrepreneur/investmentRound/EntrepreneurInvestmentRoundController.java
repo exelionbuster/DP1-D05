@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import acme.components.CustomCommand;
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Entrepreneur;
 import acme.framework.components.BasicCommand;
@@ -35,6 +34,7 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 
 	@Autowired
 	private EntrepreneurInvestmentRoundShowService		showService;
+
 	@Autowired
 	private EntrepreneurInvestmentRoundCreateService	createService;
 
@@ -44,9 +44,6 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 	@Autowired
 	private EntrepreneurInvestmentRoundDeleteService	deleteService;
 
-	@Autowired
-	private EntrepreneurInvestmentRoundPublishService	publishService;
-
 
 	// Constructors -----------------------------------------------------------
 
@@ -54,7 +51,6 @@ public class EntrepreneurInvestmentRoundController extends AbstractController<En
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
 		super.addBasicCommand(BasicCommand.LIST, this.listService);
-		super.addCustomCommand(CustomCommand.PUBLISH, BasicCommand.UPDATE, this.publishService);
 		super.addBasicCommand(BasicCommand.CREATE, this.createService);
 		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
 		super.addBasicCommand(BasicCommand.DELETE, this.deleteService);

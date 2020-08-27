@@ -35,6 +35,8 @@ entrepreneur.investment-round.error.ticker = El ticker debe seguir el patrón SS
 entrepreneur.investment-round.error.ticker.year = YY en SSS-YY-NNNNNN debe coincidir con los dos últimos digitos del año de la fecha de creación
 entrepreneur.investment-round.error.ticker.activity-sector = SSS en SSS-YY-NNNNNN deben ser mayúsculas y coincidir con las tres primeras letras del sector de actividad del empresario
 entrepreneur.investment-round.error.ticker.digits = NNNNNN en SSS-YY-NNNNNN deben ser seis dígitos
+entrepreneur.investment-round.error.amount = Los presupuestos de actividad deben sumar la cantidad total de la ronda de inversión
+entrepreneur.investment-round.error.applications = No se puede eliminar una ronda de inversión que tenga al menos una solicitud
 
 entrepreneur.investment-round.form.button.activities = Actividades
 entrepreneur.investment-round.form.button.return = Volver
