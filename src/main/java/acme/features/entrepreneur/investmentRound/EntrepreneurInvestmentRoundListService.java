@@ -43,6 +43,16 @@ public class EntrepreneurInvestmentRoundListService implements AbstractListServi
 	}
 
 	@Override
+	public void unbind(final Request<InvestmentRound> request, final InvestmentRound entity, final Model model) {
+		assert request != null;
+		assert entity != null;
+		assert model != null;
+
+		request.unbind(entity, model, "title", "ticker", "kind");
+
+	}
+
+	@Override
 	public Collection<InvestmentRound> findMany(final Request<InvestmentRound> request) {
 		assert request != null;
 
@@ -54,16 +64,6 @@ public class EntrepreneurInvestmentRoundListService implements AbstractListServi
 		result = this.repository.findMyInvestmentRound(principalAccId);
 
 		return result;
-	}
-
-	@Override
-	public void unbind(final Request<InvestmentRound> request, final InvestmentRound entity, final Model model) {
-		assert request != null;
-		assert entity != null;
-		assert model != null;
-
-		request.unbind(entity, model, "title", "ticker", "kind");
-
 	}
 
 }

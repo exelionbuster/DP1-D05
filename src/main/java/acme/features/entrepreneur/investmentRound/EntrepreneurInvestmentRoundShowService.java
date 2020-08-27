@@ -12,7 +12,11 @@
 
 package acme.features.entrepreneur.investmentRound;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,7 @@ import acme.entities.roles.Entrepreneur;
 import acme.features.entrepreneur.activity.EntrepreneurActivityRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -43,7 +48,19 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 	public boolean authorise(final Request<InvestmentRound> request) {
 		assert request != null;
 
-		return true;
+		boolean result;
+		int investmentRecordId;
+		InvestmentRound investmentRound;
+		Entrepreneur entrepreneur;
+		Principal principal;
+
+		investmentRecordId = request.getModel().getInteger("id");
+		investmentRound = this.repository.findOneById(investmentRecordId);
+		entrepreneur = investmentRound.getEntrepreneur();
+		principal = request.getPrincipal();
+		result = entrepreneur.getUserAccount().getId() == principal.getAccountId();
+
+		return result;
 	}
 
 	@Override
@@ -60,7 +77,15 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 			model.setAttribute("activities", null);
 		}
 
-		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link");
+		request.unbind(entity, model, "ticker", "kind", "creationDate", "title", "description", "amount", "link", "finalMode");
+
+		model.setAttribute("isFinalMode", entity.isFinalMode());
+
+		Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+		kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+		kinds.remove(entity.getKind());
+
+		model.setAttribute("kinds", kinds);
 
 	}
 
