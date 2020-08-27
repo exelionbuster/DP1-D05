@@ -1,14 +1,20 @@
 
 package acme.features.entrepreneur.application;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.applications.Application;
+import acme.entities.forums.Forum;
 import acme.entities.roles.Entrepreneur;
+import acme.features.authenticated.forum.AuthenticatedForumRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Authenticated;
 import acme.framework.services.AbstractUpdateService;
 
 @Service
@@ -16,7 +22,10 @@ public class EntrepreneurApplicationUpdateService implements AbstractUpdateServi
 	// Internal interface --------------------
 
 	@Autowired
-	EntrepreneurApplicationRepository repository;
+	EntrepreneurApplicationRepository	repository;
+
+	@Autowired
+	AuthenticatedForumRepository		forumRepository;
 
 
 	// AbstractListService<Entrepreneur, Application> interface ------
@@ -77,6 +86,14 @@ public class EntrepreneurApplicationUpdateService implements AbstractUpdateServi
 	public void update(final Request<Application> request, final Application entity) {
 		assert request != null;
 		assert entity != null;
+
+		if (entity.getStatus().equals("accepted")) {
+			Forum forum = this.forumRepository.findOneByInvRoundId(entity.getInvestmentRound().getId());
+			Authenticated investor = this.forumRepository.findAuthenticatedByUsername(entity.getInvestor().getUserAccount().getUsername());
+			Set<Authenticated> users = new HashSet<Authenticated>(forum.getInvolvedUsers());
+			users.add(investor);
+			forum.setInvolvedUsers(users);
+		}
 
 		this.repository.save(entity);
 	}

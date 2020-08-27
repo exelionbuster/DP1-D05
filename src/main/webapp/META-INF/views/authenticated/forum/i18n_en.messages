@@ -22,8 +22,10 @@ authenticated.forum.form.label.investment-round = Investment round:
 authenticated.forum.form.label.no-inv-round		= This forum isn't associated to any investment round
 
 authenticated.forum.form.error.wrong-username	= The following usernames do not exist or cannot be added: 
+authenticated.forum.form.error.has-inv-round	= This forum cannot be deleted as it belongs to an investment round
 
 authenticated.forum.form.button.messages 		= Messages
+authenticated.forum.form.button.new-message		= Send a message
 authenticated.forum.form.button.update			= Update
 authenticated.forum.form.button.delete			= Delete
 authenticated.forum.form.button.create			= Create

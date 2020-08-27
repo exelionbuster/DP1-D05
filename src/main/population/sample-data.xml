@@ -992,7 +992,6 @@
 		<property name="owner" ref="entrepreneur1Authenticated"/>
 		<property name="involvedUsers">
 			<list>
-				<ref bean="entrepreneur1Authenticated"/>
 				<ref bean="bookkeeper1Authenticated"/>
 				<ref bean="investor1Authenticated"/>
 			</list>
@@ -1006,7 +1005,6 @@
 		<property name="owner" ref="entrepreneur2Authenticated"/>
 		<property name="involvedUsers">
 			<list>
-				<ref bean="entrepreneur2Authenticated"/>
 				<ref bean="investor2Authenticated"/>
 			</list>
 		</property>

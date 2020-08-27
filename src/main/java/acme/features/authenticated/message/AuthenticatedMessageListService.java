@@ -10,14 +10,16 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.messages;
+package acme.features.authenticated.message;
 
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.forums.Forum;
 import acme.entities.messages.Message;
+import acme.features.authenticated.forum.AuthenticatedForumRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Authenticated;
@@ -29,7 +31,10 @@ public class AuthenticatedMessageListService implements AbstractListService<Auth
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AuthenticatedMessageRepository repository;
+	AuthenticatedMessageRepository	repository;
+
+	@Autowired
+	AuthenticatedForumRepository	forumRepository;
 
 
 	// AbstractListService<Authenticated, Message> interface --------------
@@ -38,15 +43,10 @@ public class AuthenticatedMessageListService implements AbstractListService<Auth
 	public boolean authorise(final Request<Message> request) {
 		assert request != null;
 
-		int forumId;
-		Authenticated user;
+		Authenticated user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
+		Forum forum = this.repository.findMessageForum(request.getModel().getInteger("forumId"));
 
-		user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
-
-		forumId = request.getModel().getInteger("forumId");
-		Collection<Authenticated> users = this.repository.findMessageForum(forumId).getInvolvedUsers();
-
-		return users.contains(user);
+		return this.forumRepository.isInvolved(forum, user);
 	}
 
 	@Override
