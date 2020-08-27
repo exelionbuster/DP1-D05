@@ -27,3 +27,5 @@ administrator.dashboard.form.chart.title.techs-by-licence			=	Tecnologías por l
 administrator.dashboard.form.chart.title.inv-round-by-kind			=	Rondas de inversión por tipo
 
 administrator.dashboard.form.chart.title.apps-by-status				=	Solicitudes por estado
+
+administrator.dashboard.form.chart.title.past-15-days-apps			=	Solicitudes de los últimos 15 días
