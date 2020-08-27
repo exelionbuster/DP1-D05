@@ -141,7 +141,7 @@
 	
 	<bean name="entrepreneur1Entrepreneur" class="acme.entities.roles.Entrepreneur">
 		<property name="startUpName" value="Entrepreneur 1"/>
-		<property name="activitySector" value="Activity sector Entrepreneur 1"/>
+		<property name="activitySector" value="Technology"/>
 		<property name="qualifications" value="Qualifications Entrepreneur 1"/>
 		<property name="skills" value="Skills Entrepreneur 1"/>
 		<property name="userAccount" ref="entrepreneur1UserAccount"/>
@@ -172,7 +172,7 @@
 	
 	<bean name="entrepreneur2Entrepreneur" class="acme.entities.roles.Entrepreneur">
 		<property name="startUpName" value="Entrepreneur 2"/>
-		<property name="activitySector" value="Activity sector Entrepreneur 2"/>
+		<property name="activitySector" value="Science"/>
 		<property name="qualifications" value="Qualifications Entrepreneur 2"/>
 		<property name="skills" value="Skills Entrepreneur 2"/>
 		<property name="userAccount" ref="entrepreneur2UserAccount"/>

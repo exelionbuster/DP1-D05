@@ -37,6 +37,7 @@ entrepreneur.investment-round.error.ticker.activity-sector = SSS en SSS-YY-NNNNN
 entrepreneur.investment-round.error.ticker.digits = NNNNNN en SSS-YY-NNNNNN deben ser seis dígitos
 entrepreneur.investment-round.error.amount = Los presupuestos de actividad deben sumar la cantidad total de la ronda de inversión
 entrepreneur.investment-round.error.applications = No se puede eliminar una ronda de inversión que tenga al menos una solicitud
+entrepreneur.investment-round.error.activities = Las rondas de inversión no se pueden actualizar a modelo final si no tienen actividades
 
 entrepreneur.investment-round.form.button.activities = Actividades
 entrepreneur.investment-round.form.button.return = Volver

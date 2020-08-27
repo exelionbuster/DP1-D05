@@ -1,8 +1,12 @@
 
 package acme.features.entrepreneur.investmentRound;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,7 +84,15 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 
 		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link", "finalMode");
 
-		model.setAttribute("isFinalMode", entity.isFinalMode());
+		InvestmentRound investmentRound = this.repository.findOneById(entity.getId());
+
+		model.setAttribute("isFinalMode", investmentRound.isFinalMode());
+
+		Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+		kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+		kinds.remove(entity.getKind());
+
+		model.setAttribute("kinds", kinds);
 	}
 
 	@Override
@@ -102,33 +114,42 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		assert entity != null;
 		assert errors != null;
 
-		// InvestmentRecord no se puede salvar si a menos que las activities budgets wirkprogramme sum up to the total amount of money
-		if (request.getModel().getBoolean("finalMode") == true) {
-			if (!errors.hasErrors("finalMode")) {
-				boolean b = false;
-				Double acum = 0.0;
-				Collection<Activity> activities = this.repository.findActivityByInvestmentRound(entity.getId());
-				for (Activity a : activities) {
-					acum += a.getBudget().getAmount();
-				}
-				b = acum.equals(entity.getAmount().getAmount());
-				errors.state(request, b, "finalMode", "entrepreneur.investmentRecord.error.amount");
-			}
+		boolean validAmount = false;
+		boolean haveActivities = false;
+		boolean res = request.getModel().getBoolean("finalMode");
+
+		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
+
+		if (!activities.isEmpty()) {
+			request.getModel().setAttribute("activities", activities);
+		} else {
+			request.getModel().setAttribute("activities", null);
 		}
 
-		if (!errors.hasErrors("finalMode")) {
-			boolean validAmount = false;
+		if (request.getModel().getAttribute("activities") != null && entity.isFinalMode()) {
+			haveActivities = true;
 
-			if (this.repository.checkAmount(entity.getId()) && entity.isFinalMode()) {
+			if (this.repository.checkAmount(entity.getId())) {
 				validAmount = true;
 			} else {
 				errors.state(request, validAmount, "finalMode", "entrepreneur.investment-round.error.amount");
 			}
 
+		} else if (res) {
+			errors.state(request, haveActivities, "finalMode", "entrepreneur.investment-round.error.activities");
 		}
 
 		if (errors.hasErrors()) {
-			request.getModel().setAttribute("isFinalMode", entity.isFinalMode());
+			InvestmentRound investmentRound = this.repository.findOneById(entity.getId());
+			request.getModel().setAttribute("isFinalMode", investmentRound.isFinalMode());
+
+			Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+			kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+			if (entity.getKind() != null) {
+				kinds.remove(entity.getKind());
+			}
+
+			request.getModel().setAttribute("kinds", kinds);
 		}
 
 		// Detectar que las cadenas no son spam

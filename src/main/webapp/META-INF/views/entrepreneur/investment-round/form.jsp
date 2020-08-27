@@ -14,8 +14,16 @@
 		<jstl:if test="${command != 'create'}">
 			<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate" readonly="true"/>
 		</jstl:if>
-	
-		<acme:form-textbox code="entrepreneur.investment-round.form.label.kind" path="kind"/>	
+		
+		<acme:form-select code="entrepreneur.investment-round.form.label.kind" path="kind">
+			<jstl:if test="${command !='create'}">
+				<acme:form-option code="${kind}" value="${kind}"/>
+			</jstl:if>
+			<jstl:forEach items="${kinds}"  var="kindC">
+				<acme:form-option code="${kindC}" value="${kindC}"/>
+			</jstl:forEach>
+		</acme:form-select>
+		
 		<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description"/>
 		<acme:form-money code="entrepreneur.investment-round.form.label.amount" path="amount"/>
 		<acme:form-url code="entrepreneur.investment-round.form.label.link" path="link"/>
@@ -38,18 +46,11 @@
 			<acme:form-moment code="entrepreneur.investment-round.form.label.creation-date" path="creationDate" readonly="true"/>
 		</jstl:if>
 	
-		<!-- el desplegable va aquí -->
-	
-		<jstl:if test="${command !=create}">
-			<acme:form-option code="${activitySector}" value="${activitySector}"/>
-		</jstl:if>
-		<jstl:forEach items="${sectors}"  var="sector">
-			<acme:form-option code="${sector}" value="${sector}"/>
-		</jstl:forEach>	
-		
+		<acme:form-textbox code="entrepreneur.investment-round.form.label.kind" path="kind" readonly="true"/>	
 		<acme:form-textarea code="entrepreneur.investment-round.form.label.description" path="description" readonly="true"/>
 		<acme:form-money code="entrepreneur.investment-round.form.label.amount" path="amount" readonly="true"/>
 		<acme:form-url code="entrepreneur.investment-round.form.label.link" path="link" readonly="true"/>
+	
 	</jstl:if>
 
 	<jstl:if test="${activities != null}">

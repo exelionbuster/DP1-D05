@@ -12,7 +12,11 @@
 
 package acme.features.entrepreneur.investmentRound;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,9 +77,15 @@ public class EntrepreneurInvestmentRoundShowService implements AbstractShowServi
 			model.setAttribute("activities", null);
 		}
 
-		request.unbind(entity, model, "ticker", "kind", "creationDate", "title", "description", "amount", "link");
+		request.unbind(entity, model, "ticker", "kind", "creationDate", "title", "description", "amount", "link", "finalMode");
 
 		model.setAttribute("isFinalMode", entity.isFinalMode());
+
+		Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+		kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+		kinds.remove(entity.getKind());
+
+		model.setAttribute("kinds", kinds);
 
 	}
 

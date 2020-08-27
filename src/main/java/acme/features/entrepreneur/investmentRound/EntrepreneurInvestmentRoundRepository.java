@@ -53,4 +53,7 @@ public interface EntrepreneurInvestmentRoundRepository extends AbstractRepositor
 	@Query("select sum(a.budget.amount)=a.investmentRound.amount.amount from Activity a where a.investmentRound.id = ?1")
 	boolean checkAmount(int id);
 
+	@Query("select c.invRoundKinds from Configuration c")
+	String findInvRoundKinds();
+
 }

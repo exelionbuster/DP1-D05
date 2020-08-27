@@ -1,8 +1,12 @@
 
 package acme.features.entrepreneur.investmentRound;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +52,11 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 		assert model != null;
 
 		request.unbind(entity, model, "ticker", "kind", "title", "description", "amount", "link");
+
+		Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+		kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+
+		model.setAttribute("kinds", kinds);
 
 		model.setAttribute("isFinalMode", false);
 	}
@@ -145,6 +154,14 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 				errors.state(request, !this.repository.checkUniqueTicker(entity.getTicker()), "ticker", "entrepreneur.investment-round.error.unique-ticker");
 			}
 		}
+
+		Set<String> kinds = new HashSet<String>(Arrays.asList(this.repository.findInvRoundKinds().split(";")));
+		kinds = kinds.stream().map(String::trim).collect(Collectors.toSet());
+		if (entity.getKind() != null) {
+			kinds.remove(entity.getKind());
+		}
+
+		request.getModel().setAttribute("kinds", kinds);
 
 	}
 
