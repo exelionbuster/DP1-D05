@@ -8,6 +8,7 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
+administrator.bookkeeper-request.form.label.auth-name					= Usuario:
 administrator.bookkeeper-request.form.label.firm-name					= Nombre empresarial:
 administrator.bookkeeper-request.form.label.responsibility-statement	= Declaración de responsabilidad:
 administrator.bookkeeper-request.form.label.accepted					= Aceptar

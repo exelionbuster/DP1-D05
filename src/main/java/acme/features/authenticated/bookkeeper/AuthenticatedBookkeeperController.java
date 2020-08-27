@@ -22,6 +22,6 @@ public class AuthenticatedBookkeeperController extends AbstractController<Authen
 
 	@PostConstruct
 	private void initialise() {
-		super.addBasicCommand(BasicCommand.CREATE, this.updateService);
+		super.addBasicCommand(BasicCommand.UPDATE, this.updateService);
 	}
 }

@@ -128,6 +128,7 @@ master.menu.user-account.patron = Datos de patrocinador
 master.menu.user-account.become-investor = Hazte inversor
 master.menu.user-account.investor = Datos de inversor
 master.menu.user-account.bookkeeper-request = Hazte contable
+master.menu.user-account.bookkeeper	= Datos de contable
 
 ﻿# master.footer ###############################################################
 

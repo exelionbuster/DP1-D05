@@ -31,6 +31,8 @@ public class AdministratorBookkeeperRequestShowService implements AbstractShowSe
 
 		request.unbind(entity, model, "firmName", "responsibilityStatement", "accepted");
 
+		model.setAttribute("authName", entity.getAuthenticated().getUserAccount().getUsername());
+
 		model.setAttribute("isAccepted", entity.isAccepted());
 
 	}

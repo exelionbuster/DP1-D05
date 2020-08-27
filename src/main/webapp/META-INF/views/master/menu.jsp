@@ -142,6 +142,8 @@
 				access="hasRole('Investor')" />
 			<acme:menu-suboption code="master.menu.user-account.bookkeeper-request" action="/authenticated/bookkeeper-request/create"
 				access="!hasRole('Bookkeeper')" />
+			<acme:menu-suboption code="master.menu.user-account.bookkeeper" action="/authenticated/bookkeeper/update"
+				access="hasRole('Bookkeeper')" />
 				
 		</acme:menu-option>
 
