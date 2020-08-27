@@ -37,6 +37,8 @@ public class Activity extends DomainEntity {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				endDate;
 
+	@NotNull
+	@Valid
 	private Money				budget;
 
 	//	Relationships --------------------------------------

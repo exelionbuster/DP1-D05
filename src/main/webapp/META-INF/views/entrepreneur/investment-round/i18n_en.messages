@@ -38,5 +38,6 @@ entrepreneur.investment-round.error.amount = Activity budgets must add up to the
 entrepreneur.investment-round.error.applications = An investment round that has at least one apply cannot be deleted
 entrepreneur.investment-round.error.activities = Investment rounds cannot be upgraded to final model if she has no activities
 
+entrepreneur.investment-round.form.button.new-activity = New activity
 entrepreneur.investment-round.form.button.activities = Activities
 entrepreneur.investment-round.form.button.return = Return

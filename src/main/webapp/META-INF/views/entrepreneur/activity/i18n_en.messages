@@ -13,8 +13,14 @@ entrepreneur.activity.list.label.end-date = End date
 entrepreneur.activity.list.label.budget = Budget
 
 entrepreneur.activity.form.label.title = Title:
-entrepreneur.activity.form.label.creation-date = Creation date:
+entrepreneur.activity.form.label.start-date = Start date:
 entrepreneur.activity.form.label.end-date = End date:
 entrepreneur.activity.form.label.budget = Budget:
+
+entrepreneur.activity.form.error.dates = The start date must be before the end date
+
+entrepreneur.activity.form.button.create = Create
+entrepreneur.activity.form.button.update = Update
+entrepreneur.activity.form.button.delete = Delete
 
 entrepreneur.activity.form.button.return = Return
