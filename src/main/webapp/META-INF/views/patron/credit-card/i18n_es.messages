@@ -11,9 +11,10 @@
 patron.credit-card.form.label.holder-name 			= Nombre del propietario:
 patron.credit-card.form.label.number 				= Número:
 patron.credit-card.form.label.brand 				= Marca:
-patron.credit-card.form.label.expiration-date 		= Fecha de expiración:
+patron.credit-card.form.label.expiration-date 		= Fecha de expiración (MM/yyyy):
 patron.credit-card.form.label.cvv 					= CVV:
 
+patron.credit-card.form.error.date-format			= Debe seguir el formato especificado
 patron.credit-card.form.error.past-expiration-date 	= La fecha de expiración debe ser futura
 
 patron.credit-card.form.button.create 				= Crear

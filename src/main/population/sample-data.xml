@@ -19,6 +19,30 @@
 	
 		<!--  Roles -->
 		
+			<!-- Authenticated users -->
+			
+	<bean name="authenticatedUserAccount03" class="acme.framework.entities.UserAccount">
+		<property name="username" value="patata" />
+		<property name="password" value="patata" />
+		<property name="enabled" value="true" />
+		<property name="identity">
+			<bean class="acme.datatypes.UserIdentity">
+				<property name="name" value="Patata" />
+				<property name="surname" value="Potato" />
+				<property name="email" value="patata.potato@acme.com" />
+			</bean>
+		</property>
+		<property name="roles">
+			<list>
+				<ref bean="authenticatedAuthenticated03" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean name="authenticatedAuthenticated03" class="acme.framework.entities.Authenticated">
+		<property name="userAccount" ref="authenticatedUserAccount03" />
+	</bean>
+	
 			<!-- Patrons -->
 	<bean id="patron1UserAccount" class="acme.framework.entities.UserAccount">
 		<property name="username" value="patron1"/>
@@ -244,6 +268,7 @@
 		<property name="userAccount" ref="investor2UserAccount" />
 	</bean>
 	
+	
 	<!-- Bookkeepers -->
 	<bean id="bookkeeper1UserAccount" class="acme.framework.entities.UserAccount">
 		<property name="username" value="bookkeeper1"/>
@@ -301,6 +326,14 @@
 	
 	<bean name="bookkeeper2Authenticated" class="acme.framework.entities.Authenticated">
 		<property name="userAccount" ref="bookkeeper2UserAccount"/>
+	</bean>
+	
+	<!-- BookkeeperRequests -->
+	
+	<bean name="bookkeeperRequest01" class="acme.entities.bookkeeperRequests.BookkeeperRequest">
+		<property name="firmName" value="Patata Inc."/>
+		<property name="responsibilityStatement" value="Las patatas están ricas" />
+		<property name="authenticated" ref="authenticatedAuthenticated03" />
 	</bean>
 	
 	<!-- ToledoBulletins -->

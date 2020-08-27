@@ -6,7 +6,7 @@
 	<acme:form-textbox code="patron.credit-card.form.label.holder-name" path="holderName"/>
 	<acme:form-textbox code="patron.credit-card.form.label.number" path="number"/>
 	<acme:form-textbox code="patron.credit-card.form.label.brand" path="brand"/>
-	<acme:form-textbox code="patron.credit-card.form.label.expiration-date" path="ccDate"/>
+	<acme:form-textbox code="patron.credit-card.form.label.expiration-date" path="ccDate" placeholder="MM/yyyy"/>
 	<acme:form-textbox code="patron.credit-card.form.label.cvv" path="cvv"/>
 	
 	
