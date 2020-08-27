@@ -125,7 +125,7 @@ public class AuthenticatedForumCreateService implements AbstractCreateService<Au
 		Set<Authenticated> users = new HashSet<Authenticated>();
 		String[] usernames = ((String) request.getModel().getAttribute("users")).split(",");
 		for (String user : usernames) {
-			users.add(this.repository.findUserByUsername(user.trim()));
+			users.add(this.repository.findAuthenticatedByUsername(user.trim()));
 		}
 		entity.setInvolvedUsers(users);
 
