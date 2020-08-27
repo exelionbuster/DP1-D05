@@ -45,7 +45,7 @@ public class BookkeeperAccountingRecordListService implements AbstractListServic
 
 		Collection<AccountingRecord> res;
 		InvestmentRound ir = this.investmentRepository.findOneById(request.getModel().getInteger("invRId"));
-		res = this.repository.findManyByInvestmentRound(ir.getId());
+		res = this.repository.findManyByInvestmentRound(ir.getId(), request.getPrincipal().getActiveRoleId());
 
 		return res;
 	}

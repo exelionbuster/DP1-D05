@@ -1,5 +1,5 @@
 
-package acme.features.authenticated.messages;
+package acme.features.authenticated.message;
 
 import java.util.Collection;
 

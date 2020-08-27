@@ -8,17 +8,21 @@
 # purposes.  The copyright owner does not offer any warranties or representations, nor do
 # they accept any liabilities with respect to them.
 
-patron.banner.list.slogan 				= Slogan
-patron.banner.list.target 				= Target
+patron.banner.list.slogan 						= Slogan
+patron.banner.list.target 						= Target
 
-patron.banner.form.label.picture 		= Picture:
-patron.banner.form.label.slogan 		= Slogan:
-patron.banner.form.label.target 		= Target:
-patron.banner.form.label.credit-card 	= Credit card:
+patron.banner.form.label.picture 				= Picture:
+patron.banner.form.label.slogan 				= Slogan:
+patron.banner.form.label.target 				= Target:
+patron.banner.form.label.credit-card 			= Credit card:
 
-patron.banner.form.credit-card.default 	= None
+patron.banner.form.credit-card.default 			= None
 
-patron.banner.form.button.credit-card 	= Show credit card
-
-patron.banner.form.button.return 		= Return
+patron.banner.form.button.credit-card 			= Show credit card
+patron.banner.form.button.create-credit-card 	= New credit card
+patron.banner.form.label.no-credit-card			= You have not registered a credit card:
+patron.banner.form.button.create 				= Create
+patron.banner.form.button.update 				= Update
+patron.banner.form.button.delete 				= Delete
+patron.banner.form.button.return 				= Return
 

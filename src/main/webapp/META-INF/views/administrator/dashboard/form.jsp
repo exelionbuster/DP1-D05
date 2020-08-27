@@ -13,6 +13,11 @@ div.containerR{
 display: inline-block;
 width: 40%;
 text-align: center}
+div.containerC{
+display: inline-block;
+width: 80%;
+text-align: center
+}
 </style>
 
 <h1>
@@ -357,7 +362,12 @@ text-align: center}
 		};
 		var options = {
 				legend:{display:false},
-				responsive : true
+				responsive : true,
+				scales: {yAxes:[{
+					ticks:{
+						suggestedMin : 0.0
+					}
+				}]}
 			};
 		var canvas, context;
 		
@@ -370,4 +380,77 @@ text-align: center}
 		});
 	});
 </script>
+<br />
+<br />
+<br />
+<br />
+
+<h2></h2>
+<div class="containerC">
+	<b><acme:message code="administrator.dashboard.form.chart.title.past-15-days-apps"/></b>
+	<br /><br />
+	<canvas id="chart-area7"></canvas>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		var data = {
+			labels : [
+				<jstl:forEach var="day" items="${days}" varStatus="loop">
+					"<jstl:out value="${day}"/>"
+					<jstl:if test="${!loop.last}"> ,</jstl:if>
+				</jstl:forEach>		
+			],
+			datasets: [
+				{
+					data: [
+						<jstl:forEach var="acceptedApp" items="${acceptedAppsPast15Days}" varStatus="loop">
+							<jstl:out value="${acceptedApp}"/>
+							<jstl:if test="${!loop.last}"> ,</jstl:if>
+							
+						</jstl:forEach>
+					],
+					label : "ACCEPTED",
+					borderColor : "green",
+					fill : false
+				}, {
+					data: [
+						<jstl:forEach var="rejectedApp" items="${rejectedAppsPast15Days}" varStatus="loop">
+							<jstl:out value="${rejectedApp}"/>
+							<jstl:if test="${!loop.last}"> ,</jstl:if>
+							
+						</jstl:forEach>
+					],
+					label : "REJECTED",
+					borderColor : "red",
+					fill : false
+				}, {
+					data: [
+						<jstl:forEach var="pendingApp" items="${pendingAppsPast15Days}" varStatus="loop">
+							<jstl:out value="${pendingApp}"/>
+							<jstl:if test="${!loop.last}"> ,</jstl:if>
+							
+						</jstl:forEach>
+					],
+					label : "PENDING",
+					borderColor : "gray",
+					fill : false
+				}
+			]
+		};
+		var options = {
+				responsive : true
+			};
+		var canvas, context;
+		
+		canvas = document.getElementById("chart-area7");
+		context = canvas.getContext("2d");
+		new Chart(context, {
+			type : "line",
+			data : data,
+			options : options
+		});
+	});
+</script>
+
 

@@ -31,6 +31,15 @@ public class BookkeeperAccountingRecordShowService implements AbstractShowServic
 
 		request.unbind(entity, model, "title", "creationDate", "status", "body");
 
+		boolean isPublished = false;
+
+		if (!entity.isDraft()) {
+			isPublished = true;
+		}
+		model.setAttribute("isPublished", isPublished);
+
+		model.setAttribute("published", isPublished);
+
 	}
 
 	@Override

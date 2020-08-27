@@ -1,6 +1,7 @@
 
 package acme.features.administrator.dashboard;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 
 import org.springframework.data.jpa.repository.Query;
@@ -58,4 +59,7 @@ public interface AdministratorDashboardRepository extends AbstractRepository {
 
 	@Query("select a.status, count(a) from Application a group by a.status")
 	Collection<Object[]> appByStatus();
+
+	@Query("select a.status, count(a) from Application a where a.creationDate between ?1 and ?2 group by a.status")
+	Collection<Object[]> appsLast15Days(Timestamp startDate, Timestamp endDate);
 }

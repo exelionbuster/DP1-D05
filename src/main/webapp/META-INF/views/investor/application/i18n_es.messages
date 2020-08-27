@@ -19,4 +19,12 @@
 	investor.application.form.label.status = Estado
 	investor.application.form.label.offer = Oferta
 	
+	investor.application.form.button.create = Crear
 	investor.application.form.button.return = Volver
+	
+	investor.application.form.error.null-currency = La cantidad y la divisa (€) deben ser especificadas
+	investor.application.error.unique-ticker = Este ticker ya existe
+	investor.application.error.ticker = El ticker debe seguir el patrón SSS-YY-NNNNNN
+	investor.application.error.ticker.year = YY en SSS-YY-NNNNNN debe coincidir con los dos últimos digitos del año de la fecha de creación
+	investor.application.error.ticker.activity-sector = SSS en SSS-YY-NNNNNN deben ser mayúsculas y coincidir con las tres primeras letras del sector de actividad del inversor
+	investor.application.error.ticker.digits = NNNNNN en SSS-YY-NNNNNN deben ser seis dígitos

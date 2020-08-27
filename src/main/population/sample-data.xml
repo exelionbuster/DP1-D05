@@ -41,7 +41,7 @@
 	
 	<bean name="patron1Patron" class="acme.entities.roles.Patron">
 		<property name="organisation" value="Patron Organisation 1"/>
-		<property name="activitySector" value="Activity sector Patron 1"/>
+		<property name="activitySector" value="Technology"/>
 		<property name="profile" value="Profile Patron 1"/>
 		<property name="creditCard">
 			<ref bean="creditCard01"/>
@@ -74,7 +74,7 @@
 	
 	<bean name="patron2Patron" class="acme.entities.roles.Patron">
 		<property name="organisation" value="Patron Organisation 2"/>
-		<property name="activitySector" value="Activity sector Patron 2"/>
+		<property name="activitySector" value="Business"/>
 		<property name="profile" value="Profile Patron 2"/>
 		<property name="creditCard">
 			<ref bean="creditCard02"/>
@@ -107,7 +107,7 @@
 	
 	<bean name="patron3Patron" class="acme.entities.roles.Patron">
 		<property name="organisation" value="Patron Organisation 3"/>
-		<property name="activitySector" value="Activity sector Patron 3"/>
+		<property name="activitySector" value="Health"/>
 		<property name="profile" value="Profile Patron 3"/>
 		<property name="creditCard">
 			<ref bean="creditCard03"/>
@@ -205,7 +205,7 @@
 
 	<bean name="investor1Investor" class="acme.entities.roles.Investor">
 		<property name="firmName" value="Firm Name Investor 1" />
-		<property name="activitySector" value="Activity Sector Investor 1" />
+		<property name="activitySector" value="Technology" />
 		<property name="profile" value="Profile Investor 1" />
 		<property name="userAccount" ref="investor1UserAccount" />
 	</bean>
@@ -235,9 +235,9 @@
 
 	<bean name="investor2Investor" class="acme.entities.roles.Investor">
 		<property name="firmName" value="Firm Name Investor 2" />
-		<property name="activitySector" value="Activity Sector Investor 2" />
+		<property name="activitySector" value="Science" />
 		<property name="profile" value="Profile Investor 2" />
-		<property name="userAccount" ref="investor1UserAccount" />
+		<property name="userAccount" ref="investor2UserAccount" />
 	</bean>
 
 	<bean name="investor2Authenticated" class="acme.framework.entities.Authenticated">
@@ -717,7 +717,7 @@
   	<property name="holderName" value="Alguien Uno" />
   	<property name="number" value="5500000000000004" />
   	<property name="brand" value="Visa" />
-  	<property name="expirationDate" value="2025/06/28 00:00" />
+  	<property name="expirationDate" value="2025/06/01 00:00" />
   	<property name="cvv" value="000" />
   	<property name="patron" ref="patron1Patron" />
   </bean>
@@ -726,7 +726,7 @@
   	<property name="holderName" value="Alguien Dos" />
   	<property name="number" value="6011000000000004" />
   	<property name="brand" value="Master Card" />
-  	<property name="expirationDate" value="2024/06/12 00:00" />
+  	<property name="expirationDate" value="2024/06/01 00:00" />
   	<property name="cvv" value="123" />
   	<property name="patron" ref="patron2Patron" />
   </bean>
@@ -735,7 +735,7 @@
   	<property name="holderName" value="Alguien Tres" />
   	<property name="number" value="3088000000000009" />
   	<property name="brand" value="Visa" />
-  	<property name="expirationDate" value="2022/05/10 00:00" />
+  	<property name="expirationDate" value="2022/05/01 00:00" />
   	<property name="cvv" value="999" />
   	<property name="patron" ref="patron3Patron" />
   </bean>
@@ -881,6 +881,7 @@
 		<property name="offer">
 			<ref bean="money07"/>
 		</property>
+		<property name="justification" value=""/>
 		<property name="investor" ref="investor1Investor" />
 		<property name="investmentRound" ref="investmentRound1" />
 	</bean>
@@ -893,6 +894,7 @@
 		<property name="offer">
 			<ref bean="money06"/>
 		</property>
+		<property name="justification" value="Offer too low!"/>
 		<property name="investor" ref="investor2Investor" />
 		<property name="investmentRound" ref="investmentRound1" />
 	</bean>
@@ -905,6 +907,7 @@
 		<property name="offer">
 			<ref bean="money04"/>
 		</property>
+		<property name="justification" value=""/>
 		<property name="investor" ref="investor2Investor" />
 		<property name="investmentRound" ref="investmentRound2" />
 	</bean>
@@ -956,7 +959,6 @@
 		<property name="owner" ref="entrepreneur1Authenticated"/>
 		<property name="involvedUsers">
 			<list>
-				<ref bean="entrepreneur1Authenticated"/>
 				<ref bean="bookkeeper1Authenticated"/>
 				<ref bean="investor1Authenticated"/>
 			</list>
@@ -970,7 +972,6 @@
 		<property name="owner" ref="entrepreneur2Authenticated"/>
 		<property name="involvedUsers">
 			<list>
-				<ref bean="entrepreneur2Authenticated"/>
 				<ref bean="investor2Authenticated"/>
 			</list>
 		</property>

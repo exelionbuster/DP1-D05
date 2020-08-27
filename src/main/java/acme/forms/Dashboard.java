@@ -59,4 +59,8 @@ public class Dashboard implements Serializable {
 	List<String>				appStatus;
 	List<Long>					appByStatus;
 
+	List<Long>					pendingAppsPast15Days;
+	List<Long>					acceptedAppsPast15Days;
+	List<Long>					rejectedAppsPast15Days;
+
 }

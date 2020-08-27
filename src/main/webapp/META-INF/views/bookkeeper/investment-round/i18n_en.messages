@@ -23,3 +23,4 @@ bookkeeper.investment-round.form.label.link = Link:
 bookkeeper.investment-round.form.button.activities = Activities
 bookkeeper.investment-round.form.button.accounting-records = Accounting records
 bookkeeper.investment-round.form.button.return = Return
+bookkeeper.investment-round.form.button.create-accounting-record = Create accounting record

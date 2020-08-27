@@ -20,6 +20,10 @@
 		<acme:form-submit test="${command != 'create'}" method="get" code="bookkeeper.investment-round.form.button.accounting-records" action="/bookkeeper/accounting-record/list?invRId=${id}"/>
 	</jstl:if>
 	
+	<jstl:if test="${command!= 'create'}">
+		<acme:form-return code="bookkeeper.investment-round.form.button.create-accounting-record" action="/bookkeeper/accounting-record/create?investmentRoundId=${id}"/>
+	</jstl:if>
+	
 	<acme:form-return code="bookkeeper.investment-round.form.button.return" />
 		
 </acme:form>

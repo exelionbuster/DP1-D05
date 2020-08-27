@@ -1,14 +1,20 @@
 
 package acme.features.administrator.dashboard;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.features.administrator.configuration.AdministratorConfigurationRepository;
+import acme.features.entrepreneur.application.EntrepreneurApplicationRepository;
 import acme.forms.Dashboard;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -23,6 +29,9 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 
 	@Autowired
 	private AdministratorConfigurationRepository	configurationRepository;
+
+	@Autowired
+	private EntrepreneurApplicationRepository		applicationRepository;
 
 
 	@Override
@@ -137,9 +146,6 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 			}
 		}
 
-		//		Long invRoundsByKindScale = Collections.max(invRoundsByKind) + 1;
-		//		model.setAttribute("invRoundsByKindScale", invRoundsByKindScale);
-
 		List<Object[]> appStatusAndNumber = new ArrayList<>(this.repository.appByStatus());
 		List<String> appStatus = new ArrayList<>();
 		List<Long> appByStatus = new ArrayList<>();
@@ -147,6 +153,45 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 			appStatus.add(((String) appSN[0]).toUpperCase());
 			appByStatus.add((Long) appSN[1]);
 		}
+
+		List<Long> pendingAppsPast15Days = new ArrayList<>();
+		List<Long> acceptedAppsPast15Days = new ArrayList<>();
+		List<Long> rejectedAppsPast15Days = new ArrayList<>();
+		List<String> days = new ArrayList<>();
+
+		Date now = new Date();
+		LocalDateTime ldt = LocalDateTime.ofInstant(now.toInstant(), ZoneId.systemDefault());
+		for (int i = 0; i < 15; i++) {
+			pendingAppsPast15Days.add(i, 0L);
+			acceptedAppsPast15Days.add(i, 0L);
+			rejectedAppsPast15Days.add(i, 0L);
+			Timestamp startDate = new Timestamp(ldt.getYear() - 1900, ldt.getMonthValue() - 1, ldt.getDayOfMonth(), 0, 0, 0, 0);
+			Timestamp endDate = new Timestamp(ldt.getYear() - 1900, ldt.getMonthValue() - 1, ldt.getDayOfMonth(), 23, 59, 59, 999999999);
+			List<Object[]> appsByStatusPerDay = new ArrayList<>(this.repository.appsLast15Days(startDate, endDate));
+			for (int x = 0; x < appsByStatusPerDay.size(); x++) {
+				String status = (String) appsByStatusPerDay.get(x)[0];
+				switch (status) {
+				case "pending":
+					pendingAppsPast15Days.set(i, pendingAppsPast15Days.get(i) + (Long) appsByStatusPerDay.get(x)[1]);
+					break;
+				case "accepted":
+					acceptedAppsPast15Days.set(i, acceptedAppsPast15Days.get(i) + (Long) appsByStatusPerDay.get(x)[1]);
+					break;
+				case "rejected":
+					rejectedAppsPast15Days.set(i, rejectedAppsPast15Days.get(i) + (Long) appsByStatusPerDay.get(x)[1]);
+					break;
+				}
+			}
+			String day = "";
+			day += ldt.getYear()+"-"+ldt.getMonthValue()+"-"+ldt.getDayOfMonth();
+			days.add(day);
+			ldt = ldt.minusDays(1);
+		}
+		Collections.reverse(pendingAppsPast15Days);
+		Collections.reverse(acceptedAppsPast15Days);
+		Collections.reverse(rejectedAppsPast15Days);
+		Collections.reverse(days);
+		model.setAttribute("days", days);
 
 		entity.setNumberOfNotices(numberOfNotices);
 		entity.setNumberOfTechnologyRecords(numberOfTechnologyRecords);
@@ -191,15 +236,20 @@ public class AdministratorDashboardShowService implements AbstractShowService<Ad
 
 		entity.setAppStatus(appStatus);
 		entity.setAppByStatus(appByStatus);
+		
+		entity.setPendingAppsPast15Days(pendingAppsPast15Days);
+		entity.setAcceptedAppsPast15Days(acceptedAppsPast15Days);
+		entity.setRejectedAppsPast15Days(rejectedAppsPast15Days);
 
-		request.unbind(entity, model, "numberOfNotices", "numberOfTechnologyRecords", "numberOfToolRecords", 
-			"minimumMinMoneyActiveInquiries", "maximumMinMoneyActiveInquiries", "avgMinMoneyActiveInquiries", "stddevMinMoneyActiveInquiries", 
+		request.unbind(entity, model, "numberOfNotices", "numberOfTechnologyRecords", "numberOfToolRecords",
+			"minimumMinMoneyActiveInquiries", "maximumMinMoneyActiveInquiries", "avgMinMoneyActiveInquiries", "stddevMinMoneyActiveInquiries",
 			"minimumMaxMoneyActiveInquiries", "maximumMaxMoneyActiveInquiries", "avgMaxMoneyActiveInquiries", "stddevMaxMoneyActiveInquiries", 
-			"minimumMinMoneyActiveOvertures", "maximumMinMoneyActiveOvertures", "avgMinMoneyActiveOvertures", "stddevMinMoneyActiveOvertures",
-			"minimumMaxMoneyActiveOvertures", "maximumMaxMoneyActiveOvertures", "avgMaxMoneyActiveOvertures", "stddevMaxMoneyActiveOvertures",
-			"invRoundPerEntrep", "appPerEntrep", "appPerInvestor",
-			"techRecordsSectors", "techRecordsBySector", "toolRecordsSectors", "toolRecordsBySector", "techRecordsLicence", "toolRecordsLicence",
-			"invRoundKinds", "invRoundsByKind", "appStatus", "appByStatus");
+			"minimumMinMoneyActiveOvertures", "maximumMinMoneyActiveOvertures", "avgMinMoneyActiveOvertures", "stddevMinMoneyActiveOvertures", 
+			"minimumMaxMoneyActiveOvertures", "maximumMaxMoneyActiveOvertures", "avgMaxMoneyActiveOvertures", "stddevMaxMoneyActiveOvertures", 
+			"invRoundPerEntrep", "appPerEntrep", "appPerInvestor", 
+			"techRecordsSectors", "techRecordsBySector", "toolRecordsSectors", "toolRecordsBySector", "techRecordsLicence", "toolRecordsLicence", 
+			"invRoundKinds", "invRoundsByKind", "appStatus", "appByStatus",
+			"pendingAppsPast15Days", "acceptedAppsPast15Days", "rejectedAppsPast15Days");
 	}
 
 	@Override

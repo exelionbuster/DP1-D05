@@ -28,4 +28,8 @@ public interface AuthenticatedInvestmentRoundRepository extends AbstractReposito
 
 	@Query("select a from InvestmentRound a where a.id = ?1")
 	InvestmentRound findOneById(int id);
+
+	@Query("select count(i)>0 from Investor i where i.userAccount.id = ?1")
+	Boolean isInvestor(int accountId);
+
 }

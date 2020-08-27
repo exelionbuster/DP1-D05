@@ -10,7 +10,7 @@
  * they accept any liabilities with respect to them.
  */
 
-package acme.features.authenticated.messages;
+package acme.features.authenticated.message;
 
 import javax.annotation.PostConstruct;
 
@@ -30,10 +30,13 @@ public class AuthenticatedMessageController extends AbstractController<Authentic
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private AuthenticatedMessageListService	listService;
+	private AuthenticatedMessageListService		listService;
 
 	@Autowired
-	private AuthenticatedMessageShowService	showService;
+	private AuthenticatedMessageShowService		showService;
+
+	@Autowired
+	private AuthenticatedMessageCreateService	createService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -42,6 +45,7 @@ public class AuthenticatedMessageController extends AbstractController<Authentic
 	private void initialise() {
 		super.addBasicCommand(BasicCommand.SHOW, this.showService);
 		super.addBasicCommand(BasicCommand.LIST, this.listService);
+		super.addBasicCommand(BasicCommand.CREATE, this.createService);
 	}
 
 }

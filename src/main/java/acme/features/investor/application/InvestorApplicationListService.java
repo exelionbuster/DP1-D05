@@ -1,5 +1,5 @@
 
-package acme.features.entrepreneur.application;
+package acme.features.investor.application;
 
 import java.util.Collection;
 
@@ -7,22 +7,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.applications.Application;
-import acme.entities.roles.Entrepreneur;
+import acme.entities.roles.Investor;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
 import acme.framework.entities.Principal;
 import acme.framework.services.AbstractListService;
 
 @Service
-public class EntrepreneurApplicationListByInvestmentRoundService implements AbstractListService<Entrepreneur, Application> {
+public class InvestorApplicationListService implements AbstractListService<Investor, Application> {
 
 	// Internal interface --------------------
 
 	@Autowired
-	EntrepreneurApplicationRepository repository;
+	InvestorApplicationRepository repository;
 
 
-	// AbstractListService<Entrepreneur, Application> interface ------
+	// AbstractListService<Investor, Application> interface ------
 
 	@Override
 	public boolean authorise(final Request<Application> request) {
@@ -37,7 +37,8 @@ public class EntrepreneurApplicationListByInvestmentRoundService implements Abst
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "ticker", "creationDate", "status");
+		request.unbind(entity, model, "ticker", "creationDate", "offer", "status");
+
 	}
 
 	@Override
@@ -48,7 +49,8 @@ public class EntrepreneurApplicationListByInvestmentRoundService implements Abst
 		Principal principal;
 
 		principal = request.getPrincipal();
-		result = this.repository.findApplicationsByInvestmentRound(principal.getActiveRoleId());
+		result = this.repository.findManyByApplicationId(principal.getActiveRoleId());
+
 		return result;
 	}
 

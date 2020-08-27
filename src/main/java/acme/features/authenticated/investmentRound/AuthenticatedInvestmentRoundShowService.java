@@ -17,8 +17,10 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.accountingRecords.AccountingRecord;
 import acme.entities.activities.Activity;
 import acme.entities.investmentRounds.InvestmentRound;
+import acme.features.authenticated.accountingRecord.AuthenticatedAccountingRecordRepository;
 import acme.features.authenticated.activity.AuthenticatedActivityRepository;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -35,6 +37,9 @@ public class AuthenticatedInvestmentRoundShowService implements AbstractShowServ
 
 	@Autowired
 	AuthenticatedActivityRepository			activityRepository;
+
+	@Autowired
+	AuthenticatedAccountingRecordRepository	accountingRecordRepository;
 
 
 	// AbstractListService<Authenticated, Inquiry> interface --------------
@@ -53,6 +58,7 @@ public class AuthenticatedInvestmentRoundShowService implements AbstractShowServ
 		assert model != null;
 
 		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
+		Collection<AccountingRecord> accountingRecords = this.accountingRecordRepository.findAllByInvestmentRoundId(entity.getId());
 
 		if (!activities.isEmpty()) {
 			model.setAttribute("activities", activities);
@@ -60,7 +66,20 @@ public class AuthenticatedInvestmentRoundShowService implements AbstractShowServ
 			model.setAttribute("activities", null);
 		}
 
+		if (!accountingRecords.isEmpty()) {
+			model.setAttribute("accountingRecords", accountingRecords);
+		} else {
+			model.setAttribute("accountingRecords", null);
+		}
+
 		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link");
+
+		Boolean isInvestor = false;
+
+		if (this.repository.isInvestor(request.getPrincipal().getAccountId())) {
+			isInvestor = true;
+		}
+		model.setAttribute("isInvestor", isInvestor);
 
 	}
 

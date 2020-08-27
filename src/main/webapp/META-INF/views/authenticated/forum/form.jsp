@@ -29,10 +29,14 @@
 	</jstl:if>
 	<jstl:if test="${hasMessages}">
 		<acme:form-return code="authenticated.forum.form.button.messages" action="/authenticated/message/list?forumId=${id}"/>
+	</jstl:if>
+	<jstl:if test="${command != 'create'}">
+		<acme:form-return code="authenticated.forum.form.button.new-message" 
+			action="/authenticated/message/create?forumId=${id}"/>
 		<br>
 		<br>
 	</jstl:if>
-	<acme:form-submit test="${command == 'create' and !notOwned}" 
+	<acme:form-submit test="${command == 'create'}" 
 		code="authenticated.forum.form.button.create" 
 		action="/authenticated/forum/create"/>
 	<acme:form-submit test="${command == 'show' and !notOwned}" 
@@ -45,6 +49,12 @@
 		code="authenticated.forum.form.button.update" 
 		action="/authenticated/forum/update"/>
 	<acme:form-submit test="${command == 'update' and !notOwned}" 
+		code="authenticated.forum.form.button.delete" 
+		action="/authenticated/forum/delete"/>
+	<acme:form-submit test="${command == 'delete' and !notOwned}" 
+		code="authenticated.forum.form.button.update" 
+		action="/authenticated/forum/update"/>
+	<acme:form-submit test="${command == 'delete' and !notOwned}" 
 		code="authenticated.forum.form.button.delete" 
 		action="/authenticated/forum/delete"/>
 	<acme:form-return code="authenticated.forum.form.button.return"/>

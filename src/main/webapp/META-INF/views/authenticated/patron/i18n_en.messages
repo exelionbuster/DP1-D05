@@ -1,0 +1,21 @@
+# i18n_en.messages
+#
+# Copyright (c) 2019 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+authenticated.patron.form.label.organisation = Organisation:
+authenticated.patron.form.label.activity-sector = Activity sector:
+authenticated.patron.form.label.profile = Profile:
+authenticated.patron.form.label.credit-card = Credit card:
+
+authenticated.patron.form.button.create-credit-card = New credit card
+authenticated.patron.form.button.show-credit-card = My credit card
+
+authenticated.patron.form.button.create = Register
+authenticated.patron.form.button.update = Update
+authenticated.patron.form.button.return = Return

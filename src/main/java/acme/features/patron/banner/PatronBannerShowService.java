@@ -45,10 +45,11 @@ public class PatronBannerShowService implements AbstractShowService<Patron, Bann
 
 		request.unbind(entity, model, "picture", "slogan", "target");
 
-		if (entity.getCreditCard() != null) {
+		if (entity.getPatron().getCreditCard() != null) {
+			model.setAttribute("hasCreditCard", true);
 
-			int id = entity.getCreditCard().getId();
-			String number = entity.getCreditCard().getNumber();
+			int id = entity.getPatron().getCreditCard().getId();
+			String number = entity.getPatron().getCreditCard().getNumber();
 
 			model.setAttribute("creditCardId", id);
 			model.setAttribute("creditCardNumber", number);
@@ -56,8 +57,15 @@ public class PatronBannerShowService implements AbstractShowService<Patron, Bann
 		} else {
 
 			model.setAttribute("creditCardId", null);
-
+			model.setAttribute("hasCreditCard", false);
 		}
+
+		if (entity.getCreditCard() != null) {
+			model.setAttribute("bannerHasCC", true);
+		} else {
+			model.setAttribute("bannerHasCC", false);
+		}
+
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import acme.entities.applications.Application;
 import acme.entities.roles.Entrepreneur;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
+import acme.framework.entities.Principal;
 import acme.framework.services.AbstractShowService;
 
 @Service
@@ -24,7 +25,19 @@ public class EntrepreneurApplicationShowService implements AbstractShowService<E
 	public boolean authorise(final Request<Application> request) {
 		assert request != null;
 
-		return true;
+		boolean res;
+		int applicationId;
+		Application application;
+		Entrepreneur entrepreneur;
+		Principal principal;
+
+		applicationId = request.getModel().getInteger("id");
+		application = this.repository.findApplicationById(applicationId);
+		entrepreneur = application.getInvestmentRound().getEntrepreneur();
+		principal = request.getPrincipal();
+		res = entrepreneur.getUserAccount().getId() == principal.getAccountId();
+
+		return res;
 	}
 
 	@Override
@@ -33,7 +46,7 @@ public class EntrepreneurApplicationShowService implements AbstractShowService<E
 		assert entity != null;
 		assert model != null;
 
-		request.unbind(entity, model, "ticker", "creationDate", "statement", "status", "offer", "investor.userAccount.username");
+		request.unbind(entity, model, "ticker", "creationDate", "statement", "status", "justification", "offer", "investor.userAccount.username");
 
 	}
 

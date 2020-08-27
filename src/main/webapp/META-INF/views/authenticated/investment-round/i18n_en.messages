@@ -22,3 +22,5 @@ authenticated.investment-round.form.label.link = Link:
 
 authenticated.investment-round.form.button.activities = Activities
 authenticated.investment-round.form.button.return = Return
+authenticated.investment-round.form.button.apply = Apply
+authenticated.investment-round.form.button.accounting-records = Accounting records
