@@ -23,7 +23,7 @@ import acme.framework.repositories.AbstractRepository;
 @Repository
 public interface AuthenticatedInvestmentRoundRepository extends AbstractRepository {
 
-	@Query("select i from InvestmentRound i")
+	@Query("select i from InvestmentRound i where i.finalMode = true")
 	Collection<InvestmentRound> findActiveInvestmentRound();
 
 	@Query("select a from InvestmentRound a where a.id = ?1")
