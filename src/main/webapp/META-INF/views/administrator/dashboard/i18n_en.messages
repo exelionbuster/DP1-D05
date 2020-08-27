@@ -27,3 +27,5 @@ administrator.dashboard.form.chart.title.tools-by-licence			=	Tools by licence
 administrator.dashboard.form.chart.title.inv-round-by-kind			=	Investment rounds by kind
 
 administrator.dashboard.form.chart.title.apps-by-status				=	Applications by status
+
+administrator.dashboard.form.chart.title.past-15-days-apps			=	Applications from the past 15 days
