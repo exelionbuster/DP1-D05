@@ -57,8 +57,10 @@
 		<acme:form-submit test="${command != 'create'}" method="get" code="entrepreneur.investment-round.form.button.activities" action="/entrepreneur/activity/list?id=${id}"/>
 	</jstl:if>
 	
-	<jstl:if test="${command != create}">
-		<acme:form-return  code="entrepreneur.investment-round.form.button.new-activity" action="/entrepreneur/activity/create?investmentRoundId=${id}" />
+	<jstl:if test="${!isFinalMode}">
+		<jstl:if test="${command != 'create'}">
+			<acme:form-return  code="entrepreneur.investment-round.form.button.new-activity" action="/entrepreneur/activity/create?investmentRoundId=${id}" />
+		</jstl:if>
 	</jstl:if>
 	
 	<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete"/>

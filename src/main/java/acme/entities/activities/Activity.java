@@ -31,9 +31,11 @@ public class Activity extends DomainEntity {
 	@NotBlank
 	private String				title;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				startDate;
 
+	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				endDate;
 

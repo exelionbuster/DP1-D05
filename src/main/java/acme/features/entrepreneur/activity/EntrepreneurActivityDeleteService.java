@@ -5,7 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.activities.Activity;
+import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Entrepreneur;
+import acme.features.entrepreneur.investmentRound.EntrepreneurInvestmentRoundRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -15,42 +17,71 @@ import acme.framework.services.AbstractDeleteService;
 public class EntrepreneurActivityDeleteService implements AbstractDeleteService<Entrepreneur, Activity> {
 
 	@Autowired
-	EntrepreneurActivityRepository repository;
+	EntrepreneurActivityRepository			repository;
+
+	@Autowired
+	EntrepreneurInvestmentRoundRepository	investmentRoundRepository;
 
 
 	@Override
 	public boolean authorise(final Request<Activity> request) {
-		// TODO Auto-generated method stub
-		return false;
+		assert request != null;
+
+		return true;
 	}
 
 	@Override
 	public void bind(final Request<Activity> request, final Activity entity, final Errors errors) {
-		// TODO Auto-generated method stub
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+
+		request.bind(entity, errors);
 
 	}
 
 	@Override
 	public void unbind(final Request<Activity> request, final Activity entity, final Model model) {
-		// TODO Auto-generated method stub
+		assert request != null;
+		assert entity != null;
+		assert model != null;
+
+		request.unbind(entity, model, "title", "startDate", "endDate", "budget");
 
 	}
 
 	@Override
 	public Activity findOne(final Request<Activity> request) {
-		// TODO Auto-generated method stub
-		return null;
+		Activity res;
+		int id;
+
+		id = request.getModel().getInteger("id");
+		res = this.repository.findOneById(id);
+
+		return res;
 	}
 
 	@Override
 	public void validate(final Request<Activity> request, final Activity entity, final Errors errors) {
-		// TODO Auto-generated method stub
+		assert request != null;
+		assert entity != null;
+		assert errors != null;
+
+		if (!errors.hasErrors("budget")) {
+			int id = request.getModel().getInteger("id");
+			Activity ac = this.repository.findOneById(id);
+			InvestmentRound investmentRound = ac.getInvestmentRound();
+
+			errors.state(request, !investmentRound.isFinalMode(), "budget", "entrepreneur.activity.form.error.isFinalMode");
+		}
 
 	}
 
 	@Override
 	public void delete(final Request<Activity> request, final Activity entity) {
-		// TODO Auto-generated method stub
+		assert request != null;
+
+		this.repository.delete(entity);
 
 	}
 

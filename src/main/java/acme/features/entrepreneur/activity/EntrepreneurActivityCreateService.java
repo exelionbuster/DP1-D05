@@ -59,6 +59,7 @@ public class EntrepreneurActivityCreateService implements AbstractCreateService<
 
 		model.setAttribute("investmentRoundId", entity.getInvestmentRound().getId());
 
+		model.setAttribute("isFinalMode", false);
 	}
 
 	@Override
@@ -86,7 +87,6 @@ public class EntrepreneurActivityCreateService implements AbstractCreateService<
 			isBefore = entity.getStartDate().before(entity.getEndDate());
 			errors.state(request, isBefore, "endDate", "entrepreneur.activity.form.error.dates");
 		}
-
 	}
 
 	@Override
