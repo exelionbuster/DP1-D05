@@ -32,7 +32,7 @@ public class AuthenticatedForumUpdateService implements AbstractUpdateService<Au
 		Authenticated user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
 		Forum forum = this.repository.findOneById(request.getModel().getInteger("id"));
 
-		return this.repository.isInvolved(forum, user);
+		return this.repository.isInvolved(forum.getId(), user);
 	}
 
 	@Override

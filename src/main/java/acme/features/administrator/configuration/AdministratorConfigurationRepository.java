@@ -15,4 +15,10 @@ public interface AdministratorConfigurationRepository extends AbstractRepository
 
 	@Query("select c.invRoundKinds from Configuration c")
 	String findInvRoundKinds();
+
+	@Query("select c.spamWords from Configuration c")
+	String findSpamWords();
+
+	@Query("select c.threshold from Configuration c")
+	Double findSpamThreshold();
 }

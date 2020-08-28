@@ -22,6 +22,7 @@ authenticated.message.form.button.checkbox 		= I accept that messages cannot be 
 authenticated.message.form.no-tags 				= This message has no tags
 
 authenticated.message.form.error.must-accept	= Since messages cannot be edited or deleted, you must agree with the conditions before posting 
+authenticated.message.form.error.spam			= This message is considered spam, therefore it cannot be sent
 
 authenticated.message.form.button.create		= Send message
 authenticated.message.form.button.return 		= Return

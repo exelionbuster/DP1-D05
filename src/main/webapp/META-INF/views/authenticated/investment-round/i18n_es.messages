@@ -20,6 +20,9 @@ authenticated.investment-round.form.label.description = Descripción:
 authenticated.investment-round.form.label.amount = Cantidad:
 authenticated.investment-round.form.label.link = Enlace:
 
+authenticated.message.form.error.spam = Esta ronda de inversión o sus actividades se consideran spam, por lo que no puede ser publicada
+
+authenticated.investment-round.form.button.forum = Foro
 authenticated.investment-round.form.button.activities = Actividades
 authenticated.investment-round.form.button.return = Volver
 authenticated.investment-round.form.button.apply = Petición

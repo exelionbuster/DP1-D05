@@ -1,11 +1,17 @@
 
 package acme.features.patron.banner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.banners.Banner;
 import acme.entities.roles.Patron;
+import acme.features.administrator.configuration.AdministratorConfigurationRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -16,7 +22,10 @@ import acme.framework.services.AbstractCreateService;
 public class PatronBannerCreateService implements AbstractCreateService<Patron, Banner> {
 
 	@Autowired
-	PatronBannerRepository repository;
+	PatronBannerRepository							repository;
+
+	@Autowired
+	private AdministratorConfigurationRepository	configurationRepository;
 
 
 	@Override
@@ -65,6 +74,34 @@ public class PatronBannerCreateService implements AbstractCreateService<Patron, 
 		assert entity != null;
 		assert errors != null;
 
+		if (!errors.hasErrors()) {
+			Boolean isSpam = false;
+			List<String> spamWords = new ArrayList<String>();
+			String content = "";
+			Double contentSize;
+			Double spamCount = 0.0;
+			Double spamThreshold = 0.0;
+
+			spamWords.addAll(Arrays.asList(this.configurationRepository.findSpamWords().split(",")));
+			spamWords = spamWords.stream().map(String::trim).map(String::toLowerCase).collect(Collectors.toList());
+
+			content += entity.getPicture().toLowerCase() + entity.getSlogan().toLowerCase() + entity.getTarget().toLowerCase();
+			;
+
+			for (String spamword : spamWords) {
+				Integer loopCount = 0;
+				loopCount += content.split(spamword, -1).length - 1;
+				spamCount += loopCount * spamword.length();
+			}
+
+			contentSize = 1.0 * content.length();
+
+			spamThreshold = this.configurationRepository.findSpamThreshold();
+
+			isSpam = spamCount / contentSize * 100 >= spamThreshold;
+
+			errors.state(request, !isSpam, "target", "patron.banner.form.error.spam");
+		}
 	}
 
 	@Override

@@ -44,7 +44,7 @@ public class AuthenticatedMessageShowService implements AbstractShowService<Auth
 
 		Message msg = this.repository.findOneById(request.getModel().getInteger("id"));
 
-		return this.forumRepository.isInvolved(msg.getForum(), user);
+		return this.forumRepository.isInvolved(msg.getForum().getId(), user);
 	}
 
 	@Override

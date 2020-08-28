@@ -13,12 +13,16 @@
 	<acme:form-money code="authenticated.investment-round.form.label.amount" path="amount"/>
 	<acme:form-url code="authenticated.investment-round.form.label.link" path="link"/>
 	
+	<jstl:if test="${isInvolved}">
+		<acme:form-return code="authenticated.investment-round.form.button.forum" action="/authenticated/forum/show?id=${forumId}"/>
+	</jstl:if>
+	
 	<jstl:if test="${activities != null}">
 		<acme:form-submit test="${command != 'create'}" method="get" code="authenticated.investment-round.form.button.activities" action="/authenticated/activity/list?id=${id}"/>
 	</jstl:if>
 	
 	<jstl:if test="${isInvestor}">
-	<acme:form-return code="authenticated.investment-round.form.button.apply" action="/investor/application/create?investmentRoundId=${id}"/>
+		<acme:form-return code="authenticated.investment-round.form.button.apply" action="/investor/application/create?investmentRoundId=${id}"/>
 	</jstl:if>
 	
 	<jstl:if test="${accountingRecords != null}">

@@ -1,11 +1,17 @@
 
 package acme.features.patron.banner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.banners.Banner;
 import acme.entities.roles.Patron;
+import acme.features.administrator.configuration.AdministratorConfigurationRepository;
 import acme.features.patron.creditCard.PatronCreditCardRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
@@ -17,10 +23,13 @@ import acme.framework.services.AbstractUpdateService;
 public class PatronBannerUpdateService implements AbstractUpdateService<Patron, Banner> {
 
 	@Autowired
-	PatronBannerRepository		repository;
+	PatronBannerRepository							repository;
 
 	@Autowired
-	PatronCreditCardRepository	creditCardRepository;
+	PatronCreditCardRepository						creditCardRepository;
+
+	@Autowired
+	private AdministratorConfigurationRepository	configurationRepository;
 
 
 	@Override
@@ -101,8 +110,36 @@ public class PatronBannerUpdateService implements AbstractUpdateService<Patron, 
 		assert entity != null;
 		assert errors != null;
 
-		if (errors.hasErrors()) {
+		if (!errors.hasErrors()) {
+			Boolean isSpam = false;
+			List<String> spamWords = new ArrayList<String>();
+			String content = "";
+			Double contentSize;
+			Double spamCount = 0.0;
+			Double spamThreshold = 0.0;
 
+			spamWords.addAll(Arrays.asList(this.configurationRepository.findSpamWords().split(",")));
+			spamWords = spamWords.stream().map(String::trim).map(String::toLowerCase).collect(Collectors.toList());
+
+			content += entity.getPicture().toLowerCase() + entity.getSlogan().toLowerCase() + entity.getTarget().toLowerCase();
+			;
+
+			for (String spamword : spamWords) {
+				Integer loopCount = 0;
+				loopCount += content.split(spamword, -1).length - 1;
+				spamCount += loopCount * spamword.length();
+			}
+
+			contentSize = 1.0 * content.length();
+
+			spamThreshold = this.configurationRepository.findSpamThreshold();
+
+			isSpam = spamCount / contentSize * 100 >= spamThreshold;
+
+			errors.state(request, !isSpam, "target", "patron.banner.form.error.spam");
+		}
+
+		if (errors.hasErrors()) {
 			if (entity.getPatron().getCreditCard() != null) {
 				request.getModel().setAttribute("hasCreditCard", true);
 
@@ -111,9 +148,7 @@ public class PatronBannerUpdateService implements AbstractUpdateService<Patron, 
 
 				request.getModel().setAttribute("creditCardId", id);
 				request.getModel().setAttribute("creditCardNumber", number);
-
 			} else {
-
 				request.getModel().setAttribute("creditCardId", null);
 				request.getModel().setAttribute("hasCreditCard", false);
 			}
@@ -123,7 +158,6 @@ public class PatronBannerUpdateService implements AbstractUpdateService<Patron, 
 			} else {
 				request.getModel().setAttribute("bannerHasCC", false);
 			}
-
 		}
 	}
 
