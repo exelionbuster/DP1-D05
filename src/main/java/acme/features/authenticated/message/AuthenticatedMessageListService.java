@@ -46,7 +46,7 @@ public class AuthenticatedMessageListService implements AbstractListService<Auth
 		Authenticated user = this.repository.findUser(request.getPrincipal().getActiveRoleId());
 		Forum forum = this.repository.findMessageForum(request.getModel().getInteger("forumId"));
 
-		return this.forumRepository.isInvolved(forum, user);
+		return this.forumRepository.isInvolved(forum.getId(), user);
 	}
 
 	@Override

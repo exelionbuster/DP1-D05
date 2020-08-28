@@ -12,13 +12,18 @@
 
 package acme.features.authenticated.message;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.forums.Forum;
 import acme.entities.messages.Message;
+import acme.features.administrator.configuration.AdministratorConfigurationRepository;
 import acme.features.authenticated.forum.AuthenticatedForumRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.HttpMethod;
@@ -33,10 +38,13 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	AuthenticatedMessageRepository	repository;
+	private AuthenticatedMessageRepository			repository;
 
 	@Autowired
-	AuthenticatedForumRepository	forumRepository;
+	private AuthenticatedForumRepository			forumRepository;
+
+	@Autowired
+	private AdministratorConfigurationRepository	configurationRepository;
 
 
 	// AbstractCreateService<Authenticated, Message> interface --------------
@@ -49,7 +57,7 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 
 		Forum forum = this.forumRepository.findOneById(Integer.parseInt((String) request.getModel().getAttribute("forumId")));
 
-		return this.forumRepository.isInvolved(forum, user);
+		return this.forumRepository.isInvolved(forum.getId(), user);
 	}
 
 	@Override
@@ -106,6 +114,37 @@ public class AuthenticatedMessageCreateService implements AbstractCreateService<
 		assert errors != null;
 
 		errors.state(request, request.getModel().getBoolean("accept"), "accept", "authenticated.message.form.error.must-accept");
+
+		if (request.getModel().getBoolean("accept") && !errors.hasErrors()) {
+			Boolean isSpam = false;
+			List<String> spamWords = new ArrayList<String>();
+			String content = "";
+			Double contentSize;
+			Double spamCount = 0.0;
+			Double spamThreshold;
+
+			spamWords.addAll(Arrays.asList(this.configurationRepository.findSpamWords().split(",")));
+			spamWords = spamWords.stream().map(String::trim).map(String::toLowerCase).collect(Collectors.toList());
+
+			content += entity.getTitle().toLowerCase() + entity.getBody().toLowerCase();
+			if (entity.getTags() != null) {
+				content += entity.getTags().toLowerCase();
+			}
+
+			for (String spamword : spamWords) {
+				Integer loopCount = 0;
+				loopCount += content.split(spamword, -1).length - 1;
+				spamCount += loopCount * spamword.length();
+			}
+
+			contentSize = 1.0 * content.length();
+
+			spamThreshold = this.configurationRepository.findSpamThreshold();
+
+			isSpam = spamCount / contentSize * 100 >= spamThreshold;
+
+			errors.state(request, !isSpam, "accept", "authenticated.message.form.error.spam");
+		}
 	}
 
 	@Override

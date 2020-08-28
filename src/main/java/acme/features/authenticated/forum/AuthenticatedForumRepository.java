@@ -17,8 +17,8 @@ public interface AuthenticatedForumRepository extends AbstractRepository {
 	@Query("select f from Forum f where ?1 member of f.involvedUsers or f.owner = ?1")
 	Collection<Forum> findInvolvedForums(Authenticated user);
 
-	@Query("select count(f)>0 from Forum f where f = :forum and :user member of f.involvedUsers or f.owner = :user")
-	Boolean isInvolved(@Param("forum") Forum forum, @Param("user") Authenticated user);
+	@Query("select count(f)>0 from Forum f where f.id = :forum and :user member of f.involvedUsers or f.owner = :user")
+	Boolean isInvolved(@Param("forum") int forum, @Param("user") Authenticated user);
 
 	@Query("select f from Forum f where f.id = ?1")
 	Forum findOneById(int id);

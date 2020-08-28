@@ -22,6 +22,7 @@ authenticated.message.form.button.checkbox 		= Acepto que los mensajes no pueden
 authenticated.message.form.no-tags 				= Este mensaje no tiene etiquetas
 
 authenticated.message.form.error.must-accept	= Dado que los mensajes no pueden ser editados o eliminados, debe aceptar estas condiciones antes de enviarlo
+authenticated.message.form.error.spam			= Este mensaje se considera spam, por lo que no puede ser enviado
 
 authenticated.message.form.button.create		= Enviar mensaje
 authenticated.message.form.button.return 		= Volver

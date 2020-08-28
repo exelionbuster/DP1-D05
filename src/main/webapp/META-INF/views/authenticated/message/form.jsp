@@ -32,7 +32,7 @@
 	
 	<jstl:if test="${command == 'create'}">
 		<acme:form-checkbox
-	   		code="administrator.notice.form.button.checkbox"
+	   		code="authenticated.message.form.button.checkbox"
 	    	path="accept"/>
 		<acme:form-submit code="authenticated.message.form.button.create"
 				action="/authenticated/message/create?forumId=${forumId}"/>

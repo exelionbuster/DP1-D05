@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Entrepreneur;
+import acme.features.authenticated.forum.AuthenticatedForumRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -17,7 +18,10 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 	//	Internal states ------------------
 
 	@Autowired
-	private EntrepreneurInvestmentRoundRepository repository;
+	private EntrepreneurInvestmentRoundRepository	repository;
+
+	@Autowired
+	private AuthenticatedForumRepository			forumRepository;
 
 
 	@Override
@@ -82,6 +86,8 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 	public void delete(final Request<InvestmentRound> request, final InvestmentRound entity) {
 		assert request != null;
 		assert entity != null;
+
+		this.forumRepository.delete(this.forumRepository.findOneByInvRoundId(entity.getId()));
 
 		this.repository.delete(entity);
 

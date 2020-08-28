@@ -16,6 +16,8 @@ authenticated.patron.form.label.credit-card = Tarjeta de crédito:
 authenticated.patron.form.button.create-credit-card = Nueva tarjeta de crédito
 authenticated.patron.form.button.show-credit-card = Mi tarjeta de crédito
 
+authenticated.message.form.error.spam = Este banner se considera spam, por lo que no puede ser publicado
+
 authenticated.patron.form.button.create = Registrarse
 authenticated.patron.form.button.update = Actualizar
 authenticated.patron.form.button.return = Volver
