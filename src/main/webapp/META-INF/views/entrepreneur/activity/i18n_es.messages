@@ -13,8 +13,15 @@ entrepreneur.activity.list.label.end-date = Fecha fin
 entrepreneur.activity.list.label.budget = Presupuesto
 
 entrepreneur.activity.form.label.title = Título:
-entrepreneur.activity.form.label.creation-date = Fecha de creación:
+entrepreneur.activity.form.label.start-date = Fecha de inicio:
 entrepreneur.activity.form.label.end-date = Fecha fin:
 entrepreneur.activity.form.label.budget = Presupuesto:
+
+entrepreneur.activity.form.error.dates = La fecha de inicio debe ser anterior a la fecha fin
+entrepreneur.activity.form.error.isFinalMode = No se puede actualizar o borrar un actividad cuya ronda de inversión está publicada
+
+entrepreneur.activity.form.button.create = Crear
+entrepreneur.activity.form.button.update = Actualizar
+entrepreneur.activity.form.button.delete = Borrar
 
 entrepreneur.activity.form.button.return = Volver

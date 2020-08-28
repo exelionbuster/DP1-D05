@@ -63,6 +63,10 @@ public class EntrepreneurActivityShowService implements AbstractShowService<Entr
 
 		request.unbind(entity, model, "title", "startDate", "endDate", "budget");
 
+		InvestmentRound ir = entity.getInvestmentRound();
+
+		model.setAttribute("isFinalMode", ir.isFinalMode());
+
 	}
 
 	@Override

@@ -1,12 +1,16 @@
 
 package acme.features.entrepreneur.investmentRound;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.activities.Activity;
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Entrepreneur;
 import acme.features.authenticated.forum.AuthenticatedForumRepository;
+import acme.features.entrepreneur.activity.EntrepreneurActivityRepository;
 import acme.framework.components.Errors;
 import acme.framework.components.Model;
 import acme.framework.components.Request;
@@ -22,6 +26,9 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 
 	@Autowired
 	private AuthenticatedForumRepository			forumRepository;
+  
+  @Autowired
+	EntrepreneurActivityRepository					activityRepository;
 
 
 	@Override
@@ -49,6 +56,13 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 
 		request.unbind(entity, model, "ticker", "creationDate", "kind", "title", "description", "amount", "link", "finalMode");
 
+		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
+
+		if (!activities.isEmpty()) {
+			model.setAttribute("activities", activities);
+		} else {
+			model.setAttribute("activities", null);
+		}
 	}
 
 	@Override
@@ -70,10 +84,18 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 		assert entity != null;
 		assert errors != null;
 
-		// Validar si no tiene applications
-		boolean hasApplication = this.repository.hasApplications(entity.getId());
-		if (!errors.hasErrors("link")) {
-			errors.state(request, !hasApplication, "link", "entrepreneur.investment-round.error.applications");
+		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
+
+		if (!activities.isEmpty()) {
+			request.getModel().setAttribute("activities", activities);
+		} else {
+			request.getModel().setAttribute("activities", null);
+		}
+
+		if (!errors.hasErrors()) {
+			boolean hasApplications = this.repository.hasApplications(entity.getId());
+
+			errors.state(request, !hasApplications, "link", "entrepreneur.investment-round.error.applications");
 		}
 
 		if (errors.hasErrors()) {
@@ -87,7 +109,10 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 		assert request != null;
 		assert entity != null;
 
-		this.forumRepository.delete(this.forumRepository.findOneByInvRoundId(entity.getId()));
+		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
+		this.activityRepository.deleteAll(activities);
+
+ 		this.forumRepository.delete(this.forumRepository.findOneByInvRoundId(entity.getId()));
 
 		this.repository.delete(entity);
 
