@@ -69,6 +69,11 @@ public class AdministratorOvertureCreateService implements AbstractCreateService
 
 		result = new Overture();
 
+		Date creationDate;
+
+		creationDate = new Date(System.currentTimeMillis() - 1);
+		result.setCreationDate(creationDate);
+
 		return result;
 	}
 
