@@ -57,6 +57,9 @@ public class AdministratorNoticeCreateService implements AbstractCreateService<A
 
 		res = new Notice();
 
+		Date creationDate = new Date(System.currentTimeMillis() - 1);
+		res.setCreationDate(creationDate);
+
 		return res;
 	}
 
@@ -81,8 +84,6 @@ public class AdministratorNoticeCreateService implements AbstractCreateService<A
 	public void create(final Request<Notice> request, final Notice entity) {
 		assert request != null;
 		assert entity != null;
-
-		request.getModel().getBoolean("surmanuqui");
 
 		Date creationDate = new Date(System.currentTimeMillis() - 1);
 		entity.setCreationDate(creationDate);
