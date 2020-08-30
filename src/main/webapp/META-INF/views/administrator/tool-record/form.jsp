@@ -10,7 +10,7 @@
 	
 	<acme:form-textbox code="administrator.tool-record.form.label.title" path="title" />
 	<acme:form-select code="administrator.tool-record.form.label.activity-sector" path="activitySector">
-		<jstl:if test="${command !=create}">
+		<jstl:if test="${command !='create'}">
 			<acme:form-option code="${activitySector}" value="${activitySector}"/>
 		</jstl:if>
 		<jstl:forEach items="${sectors}"  var="sector">
