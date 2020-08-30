@@ -1,6 +1,8 @@
 
 package acme.features.patron.creditCard;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -85,11 +87,11 @@ public class PatronCreditCardDeleteService implements AbstractDeleteService<Patr
 		p.setCreditCard(null);
 		entity.setPatron(null);
 
-		Banner b;
-		b = this.bannerRepository.findBannerByCreditCardId(entity.getId());
-		if (b != null) {
-			b.setCreditCard(null);
-			this.bannerRepository.save(b);
+		Collection<Banner> bs;
+		bs = this.bannerRepository.findBannerByCreditCardId(entity.getId());
+		if (!bs.isEmpty()) {
+			bs.stream().forEach(b -> b.setCreditCard(null));
+			bs.stream().forEach(b -> this.bannerRepository.save(b));
 		}
 
 		this.patronRepository.save(p);
