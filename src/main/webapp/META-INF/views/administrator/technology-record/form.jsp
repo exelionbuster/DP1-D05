@@ -17,7 +17,7 @@
 		</jstl:forEach>
 	</acme:form-select>
 	<acme:form-textbox code="administrator.technology-record.form.label.inventor" path="inventor" />
-	<acme:form-textbox code="administrator.technology-record.form.label.description" path="description" />
+	<acme:form-textarea code="administrator.technology-record.form.label.description" path="description" />
 	<acme:form-url code="administrator.technology-record.form.label.website" path="webSite" />
 	<acme:form-textbox code="administrator.technology-record.form.label.email" path="email"/>
 	<acme:form-checkbox code="administrator.technology-record.form.label.open-source" path="openSource" />
