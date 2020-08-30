@@ -82,6 +82,9 @@ public class AuthenticatedForumDeleteService implements AbstractDeleteService<Au
 
 		this.messageRepository.deleteAll(this.messageRepository.findForumMessages(entity.getId()));
 
+		entity.getInvolvedUsers().clear();
+		this.repository.save(entity);
+
 		this.repository.delete(entity);
 	}
 

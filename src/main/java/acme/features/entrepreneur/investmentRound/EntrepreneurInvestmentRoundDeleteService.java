@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.entities.activities.Activity;
+import acme.entities.forums.Forum;
 import acme.entities.investmentRounds.InvestmentRound;
 import acme.entities.roles.Entrepreneur;
 import acme.features.authenticated.forum.AuthenticatedForumRepository;
@@ -26,8 +27,8 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 
 	@Autowired
 	private AuthenticatedForumRepository			forumRepository;
-  
-  @Autowired
+
+	@Autowired
 	EntrepreneurActivityRepository					activityRepository;
 
 
@@ -112,8 +113,12 @@ public class EntrepreneurInvestmentRoundDeleteService implements AbstractDeleteS
 		Collection<Activity> activities = this.activityRepository.findActivitiesByInvestmentRound(entity.getId());
 		this.activityRepository.deleteAll(activities);
 
- 		this.forumRepository.delete(this.forumRepository.findOneByInvRoundId(entity.getId()));
-
+		if (entity.isFinalMode()) {
+			Forum forum = this.forumRepository.findOneByInvRoundId(entity.getId());
+			forum.getInvolvedUsers().clear();
+			this.forumRepository.save(entity);
+			this.forumRepository.delete(forum);
+		}
 		this.repository.delete(entity);
 
 	}
