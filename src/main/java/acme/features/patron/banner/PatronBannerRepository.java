@@ -23,6 +23,6 @@ public interface PatronBannerRepository extends AbstractRepository {
 	Patron findPatronByUserAccountId(int id);
 
 	@Query("select b from Banner b where b.creditCard.id = ?1")
-	Banner findBannerByCreditCardId(int id);
+	Collection<Banner> findBannerByCreditCardId(int id);
 
 }
