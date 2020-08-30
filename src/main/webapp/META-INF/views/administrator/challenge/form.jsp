@@ -20,7 +20,7 @@
 <acme:form>
 	<acme:form-textbox code="administrator.challenge.form.label.title" path="title" />
 	<acme:form-textbox code="administrator.challenge.form.label.deadline" placeholder="${fecha }" path="deadline" />
-	<acme:form-textbox code="administrator.challenge.form.label.description" path="description" />
+	<acme:form-textarea code="administrator.challenge.form.label.description" path="description" />
 	<acme:form-textbox code="administrator.challenge.form.label.rookie-goal" path="rookieGoal" />
 	<acme:form-double code="administrator.challenge.form.label.rookie-reward" path="rookieReward" />
 	<acme:form-textbox code="administrator.challenge.form.label.average-goal" path="averageGoal" />
