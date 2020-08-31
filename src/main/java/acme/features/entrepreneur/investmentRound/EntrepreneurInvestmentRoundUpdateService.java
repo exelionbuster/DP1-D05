@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,6 +126,71 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		assert request != null;
 		assert entity != null;
 		assert errors != null;
+
+		if (!errors.hasErrors("ticker")) {
+			Boolean validTicker = false;
+			//validación
+			String ticker = entity.getTicker();
+			String[] parts = ticker.split("-");
+			Boolean tieneTresPartes = false;
+			if (parts.length == 3) {
+				tieneTresPartes = true;
+				String part1 = parts[0];
+				String part2 = parts[1];
+				String part3 = parts[2];
+				String regexp1 = "\\d{6}";
+
+				Boolean correctActivitySector = false;
+				String checkActivitySector = entity.getEntrepreneur().getActivitySector();
+				if (checkActivitySector.length() == 1) {
+					checkActivitySector = checkActivitySector + "XX";
+				} else if (checkActivitySector.length() == 2) {
+					checkActivitySector = checkActivitySector + "X";
+				} else {
+					checkActivitySector = checkActivitySector.substring(0, 3);
+				}
+
+				if (part1.equals(checkActivitySector.toUpperCase())) {
+					correctActivitySector = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "entrepreneur.investment-round.error.ticker.activity-sector");
+				}
+
+				Boolean correctYear = false;
+				int year = entity.getCreationDate().getYear();
+				String checkYear = "" + year + "";
+
+				if (checkYear.length() >= 3) {
+					checkYear = checkYear.substring(checkYear.length() - 2, checkYear.length());
+				}
+
+				if (part2.equals(checkYear)) {
+					correctYear = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "entrepreneur.investment-round.error.ticker.year");
+				}
+
+				Boolean correctDigits = false;
+				if (Pattern.matches(regexp1, part3)) {
+					correctDigits = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "entrepreneur.investment-round.error.ticker.digits");
+				}
+
+				if (correctActivitySector && correctYear && correctDigits) {
+					validTicker = true;
+				} else {
+					errors.state(request, validTicker, "ticker", "entrepreneur.investment-round.error.ticker");
+				}
+			} else {
+				errors.state(request, tieneTresPartes, "ticker", "entrepreneur.investment-round.error.ticker");
+			}
+
+			InvestmentRound invR = this.repository.findOneById(entity.getId());
+			if (validTicker && !invR.getTicker().equals(entity.getTicker())) {
+				errors.state(request, !this.repository.checkUniqueTicker(entity.getTicker()), "ticker", "entrepreneur.investment-round.error.unique-ticker");
+			}
+		}
 
 		boolean validAmount = false;
 		boolean haveActivities = false;
