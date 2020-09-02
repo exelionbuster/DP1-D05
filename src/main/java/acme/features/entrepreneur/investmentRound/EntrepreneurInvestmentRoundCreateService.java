@@ -59,6 +59,8 @@ public class EntrepreneurInvestmentRoundCreateService implements AbstractCreateS
 		model.setAttribute("kinds", kinds);
 
 		model.setAttribute("isFinalMode", false);
+
+		model.setAttribute("accountingRecords", null);
 	}
 
 	@Override

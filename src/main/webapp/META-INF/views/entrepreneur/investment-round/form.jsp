@@ -66,6 +66,10 @@
 	<acme:form-submit test="${command == 'update'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete"/>
 	<acme:form-submit test="${command == 'show'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
 	<acme:form-submit test="${command == 'delete'}" code="entrepreneur.investment-round.form.button.delete" action="/entrepreneur/investment-round/delete" />
+		
+	<jstl:if test="${accountingRecords != null}">
+		<acme:form-return code="entrepreneur.investment-round.form.button.accounting-records" action="/authenticated/accounting-record/list?investmentRoundId=${id}"/>
+	</jstl:if>
 	
 	<acme:form-return code="entrepreneur.investment-round.form.button.return" />
 		

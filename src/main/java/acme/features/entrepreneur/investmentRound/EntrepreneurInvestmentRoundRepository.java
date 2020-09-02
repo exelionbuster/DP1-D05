@@ -17,6 +17,7 @@ import java.util.Collection;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import acme.entities.accountingRecords.AccountingRecord;
 import acme.entities.activities.Activity;
 import acme.entities.configurations.Configuration;
 import acme.entities.investmentRounds.InvestmentRound;
@@ -55,5 +56,8 @@ public interface EntrepreneurInvestmentRoundRepository extends AbstractRepositor
 
 	@Query("select c.invRoundKinds from Configuration c")
 	String findInvRoundKinds();
+
+	@Query("select ar from AccountingRecord ar where ar.investmentRound.id = ?1 and ar.draft=false")
+	Collection<AccountingRecord> findAllByInvestmentRoundId(int id);
 
 }

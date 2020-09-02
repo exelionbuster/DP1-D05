@@ -21,10 +21,10 @@ entrepreneur.investment-round.form.label.amount = Amount:
 entrepreneur.investment-round.form.label.link = Link:
 entrepreneur.investment-round.form.label.finalMode = Publish mode
 
+entrepreneur.investment-round.form.button.accounting-records = Accounting records
 entrepreneur.investment-round.form.button.update = Update
 entrepreneur.investment-round.form.button.create = Create
 entrepreneur.investment-round.form.button.delete = Delete
-entrepreneur.investment-round.form.button.publish = Publish
 
 entrepreneur.investmentRound.error.applications = You can not delete an investment round with applications
 entrepreneur.investmentRecord.error.amount = You can not publish a investment round unless the activity budgets in its work programme sum up to the total amount of money in the round

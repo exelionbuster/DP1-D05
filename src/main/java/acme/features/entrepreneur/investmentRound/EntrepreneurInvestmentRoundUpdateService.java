@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.entities.accountingRecords.AccountingRecord;
 import acme.entities.activities.Activity;
 import acme.entities.forums.Forum;
 import acme.entities.investmentRounds.InvestmentRound;
@@ -106,6 +107,15 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 		kinds.remove(entity.getKind());
 
 		model.setAttribute("kinds", kinds);
+
+		Collection<AccountingRecord> accountingRecords = this.repository.findAllByInvestmentRoundId(entity.getId());
+
+		if (!accountingRecords.isEmpty()) {
+			model.setAttribute("accountingRecords", accountingRecords);
+		} else {
+			model.setAttribute("accountingRecords", null);
+		}
+
 	}
 
 	@Override
@@ -264,6 +274,15 @@ public class EntrepreneurInvestmentRoundUpdateService implements AbstractUpdateS
 			}
 
 			request.getModel().setAttribute("kinds", kinds);
+
+			Collection<AccountingRecord> accountingRecords = this.repository.findAllByInvestmentRoundId(entity.getId());
+
+			if (!accountingRecords.isEmpty()) {
+				request.getModel().setAttribute("accountingRecords", accountingRecords);
+			} else {
+				request.getModel().setAttribute("accountingRecords", null);
+			}
+
 		}
 
 	}
