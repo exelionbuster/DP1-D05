@@ -13,7 +13,7 @@ authenticated.activity.list.label.end-date = End date
 authenticated.activity.list.label.budget = Budget
 
 authenticated.activity.form.label.title = Title:
-authenticated.activity.form.label.creation-date = Creation date:
+authenticated.activity.form.label.start-date = Start date:
 authenticated.activity.form.label.end-date = End date:
 authenticated.activity.form.label.budget = Budget:
 

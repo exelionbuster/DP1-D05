@@ -21,7 +21,7 @@ administrator.challenge.form.label.average-reward		= Recompensa para el objetivo
 administrator.challenge.form.label.expert-goal			= Objetivo experto:
 administrator.challenge.form.label.expert-reward		= Recompensa para el objetivo experto:
 
-administrator.challenge.form.error.deadline				= La fecha límite tiene que ser futura
+administrator.challenge.form.error.past-deadline		= La fecha límite tiene que ser al menos un mes en el futuro
 administrator.challenge.form.error.timestamp			= La fecha límite tiene que seguir el patrón DD/MM/AAAA HH:mm
 administrator.challenge.form.error.null-currency		= La cantidad y la divisa (€) deben ser especificadas
 administrator.challenge.form.error.expert-reward		= Esta cantidad debe ser mayor o igual que la recompensa para el objetivo promedio

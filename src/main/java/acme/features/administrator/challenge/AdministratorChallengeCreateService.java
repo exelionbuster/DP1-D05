@@ -12,7 +12,8 @@
 
 package acme.features.administrator.challenge;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +80,6 @@ public class AdministratorChallengeCreateService implements AbstractCreateServic
 		Boolean validDeadline = true;
 		Boolean nullEARewards = false;
 		Boolean nullARRewards = false;
-		Date now = new Date(System.currentTimeMillis());
 
 		if (errors.hasErrors("expertReward")) {
 			nullEARewards = true;
@@ -116,7 +116,10 @@ public class AdministratorChallengeCreateService implements AbstractCreateServic
 		}
 
 		if (validDeadline) {
-			errors.state(request, entity.getDeadline().after(now), "deadline", "administrator.challenge.form.error.past-deadline");
+			Instant aMonth = ZonedDateTime.now().plusMonths(1).toInstant();
+			Instant deadline = entity.getDeadline().toInstant();
+			boolean afterMonth = deadline.isAfter(aMonth);
+			errors.state(request, afterMonth, "deadline", "administrator.challenge.form.error.past-deadline");
 		}
 	}
 

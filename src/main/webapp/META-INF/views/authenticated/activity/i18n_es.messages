@@ -13,7 +13,7 @@ authenticated.activity.list.label.end-date = Fecha fin
 authenticated.activity.list.label.budget = Presupuesto
 
 authenticated.activity.form.label.title = Título:
-authenticated.activity.form.label.creation-date = Fecha de creación:
+authenticated.activity.form.label.start-date = Fecha de inicio:
 authenticated.activity.form.label.end-date = Fecha fin:
 authenticated.activity.form.label.budget = Presupuesto:
 
